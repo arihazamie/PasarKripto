@@ -1,2 +1,6 @@
-**Tech Stack** : - NextJS 
--
+**Tech Stack** : 
+NextJS
+typyScript
+TailwindCSS
+shadcnUI
+
