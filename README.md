@@ -1,3 +1,8 @@
+Haloo semuanyaa....
+
+ini adalah website Crypto Tracking yang sederhana yang saya buat saat gabut saja.
+
+
 **Tech Stack** : 
 - NextJS
 - TypeScript
