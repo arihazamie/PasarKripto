@@ -15,6 +15,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+// Define an interface for the data
 interface CoinData {
   id: string;
   name: string;
@@ -34,11 +35,10 @@ const YourComponent: React.FC = () => {
 
   useEffect(() => {
     async function fetchCoinData() {
-
-      const api = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`;
 
       try {
-        const response = await axios.get(api);
+        const response = await axios.get(url);
         setData(response.data.map((coin: any) => ({
           id: coin.id,
           name: coin.name,
@@ -61,16 +61,18 @@ const YourComponent: React.FC = () => {
           percentage24h: coin.price_change_percentage_24h_in_currency.toFixed(1),
           percentage7d: coin.price_change_percentage_7d_in_currency.toFixed(1),
         })));
-
       } catch (error) {
         console.error(error);
       }
     }
+
+
     fetchCoinData();
   }, []);
 
+
   return (
-    <Table id="TableRanking" className="-z-50">
+    <Table id="TableRanking">
       <TableCaption>A list of coins.</TableCaption>
       <TableHeader>
         <TableRow className="">
@@ -81,10 +83,10 @@ const YourComponent: React.FC = () => {
           <TableHead>24h%</TableHead>
           <TableHead>7d%</TableHead>
           <TableHead>24h Volume</TableHead>
-          <TableHead className="TableRanking3">Market Cap</TableHead>
+          <TableHead>Market Cap</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="h-auto -z-50">
+      <TableBody className="h-auto">
       {data.map((coin: CoinData) => (
         <TableRow key={coin.id}>
           <TableCell>{coin.rank}.</TableCell>
@@ -97,7 +99,7 @@ const YourComponent: React.FC = () => {
           <TableCell className={coin.percentage24h < 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage24h}</TableCell>
           <TableCell className={coin.percentage7d < 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage7d}</TableCell>
           <TableCell>{coin.volume24h}</TableCell>
-          <TableCell className="TableRanking3">{coin.marketcap}</TableCell>
+          <TableCell>{coin.marketcap}</TableCell>
         </TableRow>
       ))}
       </TableBody>
