@@ -1,8 +1,8 @@
 **Tech Stack** : 
 - NextJS
-- typeScript
+- TypeScript
 - TailwindCSS
-- shadcnUI
+- Shadcn
 
 **API** (Free API) :
 - coingecko.com (30 hit/menit)
