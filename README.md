@@ -1,6 +1,6 @@
 **Tech Stack** : 
-NextJS
-typyScript
-TailwindCSS
-shadcnUI
+- NextJS
+- typyScript
+- TailwindCSS
+- shadcnUI
 
