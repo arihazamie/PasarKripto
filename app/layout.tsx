@@ -9,6 +9,9 @@ import NavigationBar from '@/components/readyToUse/navbar'
 const gabarito = Gabarito({ subsets: ['latin'] })
 
 import React from 'react'
+import NavbarAPI from '@/components/readyToUse/navbarAPI'
+import { Search } from "@/components/readyToUse/Search"
+import { Currency } from '@/components/readyToUse/currency'
 
 export const metadata: Metadata = {
   title: 'PasarKripto',
@@ -16,10 +19,11 @@ export const metadata: Metadata = {
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+
   return (
     <html lang="en">
       <body className={gabarito.className}>
-        <div className="" id="Navbar">
+        <div className="z-50" id="Navbar">
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="flex justify-center items-center gap-16 py-4">
               <Link href={"/"} className="text-3xl font-bold">
@@ -31,8 +35,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="hidden lg:block">
                 <NavigationBar />
               </div>
-              <ModeToggle />
+              <Search/>
+              <Currency/>
+              <ModeToggle/>
             </div>
+            <NavbarAPI/>
             {children}
           </ThemeProvider>
         </div>

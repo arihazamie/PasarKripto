@@ -31,10 +31,10 @@ const components: { title: string; link: string; description: string }[] = [
         "For sighted users to preview content available behind a link.",
     },
     {
-      title: "Exchange",
+      title: "Explorer",
       link: "/",
       description:
-        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+        "let's track your transactions easily.",
     },
     {
       title: "Dominance",
@@ -42,10 +42,10 @@ const components: { title: string; link: string; description: string }[] = [
       description: "Strength compared to other cryptocurrencies.",
     },
     {
-      title: "Spot",
-      link: "/spot",
+      title: "Exchange",
+      link: "/exchanges",
       description:
-        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+        "globally listed exchanges.",
     },
     {
       title: "Legal Tender Countries",
@@ -70,7 +70,7 @@ const components: { title: string; link: string; description: string }[] = [
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
-                    <a
+                    <Link
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
@@ -80,7 +80,7 @@ const components: { title: string; link: string; description: string }[] = [
                       <p className="text-sm leading-tight text-muted-foreground">
                       A platform that provides precise and easy-to-understand crypto market information.
                       </p>
-                    </a>
+                    </Link>
                   </NavigationMenuLink>
                 </li>
                 <Link href="/ranking" className={HoverText}>
