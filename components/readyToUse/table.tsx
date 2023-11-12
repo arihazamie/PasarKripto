@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 import {
     Table,
@@ -30,12 +31,22 @@ interface CoinData {
   percentage7d: any;
 }
 
+const itemsPerPage = 10
+
 const YourComponent: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<CoinData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchCoinData() {
-      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`;
+
+      setLoading(true);
+      setError(null);
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${itemsPerPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`;
 
       try {
         const response = await axios.get(url);
@@ -63,16 +74,29 @@ const YourComponent: React.FC = () => {
         })));
       } catch (error) {
         console.error(error);
+        setError('Max fetching data');
+      } finally {
+        setLoading(false);
       }
     }
 
 
     fetchCoinData();
-  }, []);
+  }, [currentPage]);
 
+  const handleNextPage = () => {
+    setCurrentPage(prevPage => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
 
   return (
-    <Table id="TableRanking">
+    <>
+      <Table id="TableRanking">
       <TableCaption>A list of coins.</TableCaption>
       <TableHeader>
         <TableRow className="">
@@ -104,6 +128,16 @@ const YourComponent: React.FC = () => {
       ))}
       </TableBody>
       </Table>
+      <div className="items-center justify-center text-center">
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <div>
+          <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
+          <span>Page {currentPage}</span>
+          <Button onClick={handleNextPage}>Next</Button>
+        </div>
+      </div>
+    </>
   )
 }
 

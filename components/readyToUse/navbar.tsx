@@ -92,7 +92,7 @@ const components: { title: string; link: string; description: string }[] = [
                 <Link href="/trending" className={HoverText}>
                   <div className="text-sm">
                     <div>Trending</div>
-                    <div className="text-gray-400">Most Trending Cryptocurrencies</div>
+                    <div className="text-gray-400">Top Coins & NFT in the last 24 Hours</div>
                   </div>
                 </Link>
                 <Link href="/most" className={HoverText}>
