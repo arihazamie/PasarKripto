@@ -3,7 +3,6 @@ import "@/app/globals.css"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from "next/image";
-import Link from "next/link";
 
 import {
     Table,
@@ -15,8 +14,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-
-interface CoinData {
+interface NFTData {
   id: string;
   name: string;
   symbol: string;
@@ -27,64 +25,69 @@ interface CoinData {
   floor_price_24h_percentage_change: number;
 }
 
-// Define the ApiResponse interface based on the structure of your API response
 interface ApiResponse {
-  coins: CoinData[];
+  nfts: NFTData[];
 }
 
-const TrendingApp: React.FC = () => {
-  const [data, setData] = useState<CoinData[]>([]);
+const NFTApp: React.FC = () => {
+  const [data, setData] = useState<NFTData[]>([]);
 
   useEffect(() => {
-    async function fetchCoinData() {
+    async function fetchNFTData() {
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/search/trending`;
 
       try {
         const response = await axios.get<ApiResponse>(url);
 
-        // Map the API response data to the CoinData interface
-        const coinData: CoinData[] = response.data.coins.map((coin) => ({
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          thumb: coin.thumb,
-          nft_contract_id: coin.nft_contract_id,
-          native_currency_symbol: coin.native_currency_symbol,
-          floor_price_in_native_currency: coin.floor_price_in_native_currency,
-          floor_price_24h_percentage_change: coin.floor_price_24h_percentage_change,
+        // Map the API response data to the NFTData interface
+        const nftData: NFTData[] = response.data.nfts.map((nft) => ({
+          id: nft.id,
+          name: nft.name,
+          symbol: nft.symbol,
+          thumb: nft.thumb,
+          nft_contract_id: nft.nft_contract_id,
+          native_currency_symbol: nft.native_currency_symbol,
+          floor_price_in_native_currency: nft.floor_price_in_native_currency,
+          floor_price_24h_percentage_change: nft.floor_price_24h_percentage_change,
         }));
 
-        setData(coinData);
+        setData(nftData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
-    fetchCoinData();
+    fetchNFTData();
   }, []);
 
   return (
     <>
-      <Table id="TableRanking">
-      <TableCaption>A list of coins.</TableCaption>
+    <div className="text-xl">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
+      <Table>
+      <TableCaption>A list of NFTs.</TableCaption>
       <TableHeader>
         <TableRow>
-        <TableHead>No</TableHead>
-          <TableHead>Rank</TableHead>
           <TableHead>Name</TableHead>
-          <TableHead>Price</TableHead>
+          <TableHead>Floor</TableHead>
+          <TableHead>24h%</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="h-auto">
-      {data.map((coin: CoinData) => (
-        <TableRow key={coin.id}>
-          <TableCell>{coin.name}</TableCell>
+      {data.map((nft: NFTData) => (
+        <TableRow key={nft.id}>
+            <div className="flex m-0 p-0">
+              <Image src={nft.thumb} width={52} height={0} alt={nft.name}></Image>
+              <TableCell className="font-bold text-base text-left">{nft.name}</TableCell>
+              <TableCell className="text-gray-400">{nft.symbol}</TableCell>
+            </div>
+          <TableCell className="text-left">{nft.floor_price_in_native_currency} ETH</TableCell>
+          <TableCell className={nft.floor_price_24h_percentage_change < 0 ? 'text-red-500 text-left' : 'text-green-500 text-left'}>{nft.floor_price_24h_percentage_change.toFixed(1)} %</TableCell>
         </TableRow>
       ))}
       </TableBody>
       </Table>
-    </>
+      </>
   )
 }
 
-export default TrendingApp
+export default NFTApp

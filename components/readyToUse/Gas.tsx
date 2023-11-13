@@ -61,11 +61,11 @@ const GasPriceComponent = () => {
             <p> Average: {gasPrices.proposeGasPrice}</p>
           </div>
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="z-10">
+        <NavigationMenuContent className="z-10 shadow">
           <ul className="">
             <li className="">
-              <NavigationMenuLink asChild className="">
-              <div className="gap-5 flex p-5">
+              <NavigationMenuLink asChild >
+              <div className="gap-5 flex p-3">
                 <p className="bg-opacity-100">Low: {gasPrices.safeGasPrice}</p>
                 <p>Average: {gasPrices.proposeGasPrice}</p>
                 <p>High: {gasPrices.fastGasPrice}</p>

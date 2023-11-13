@@ -6,9 +6,9 @@ const TrendingApp = () => {
   return (
     <div className="text-center my-5">
         <div className="font-bold text-xl mb-5">
-            <Link href={"/trending"} className="underline underline-offset-1">Coins</Link>
-            <Link href={"/trending-nfts"} className="mx-5">NFTs</Link>
-            <Link href={"/trending-categories"}>Categories</Link>
+            <Link href={"/"}>Coins</Link>
+            <Link href={"/"} className="mx-4">NFTs</Link>
+            <Link href={"/"}>Categories</Link>
         </div>
 
         <TrendingCoinsApps/>

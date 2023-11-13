@@ -10,7 +10,7 @@ const gabarito = Gabarito({ subsets: ['latin'] })
 
 import React from 'react'
 import NavbarAPI from '@/components/readyToUse/navbarAPI'
-import { Search } from "@/components/readyToUse/Search"
+import {Input}  from '@/components/ui/input'
 
 export const metadata: Metadata = {
   title: 'PasarKripto',
@@ -34,7 +34,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="hidden lg:block">
                 <NavigationBar />
               </div>
-              <Search/>
+              <Input/>
               <ModeToggle/>
             </div>
             <NavbarAPI/>

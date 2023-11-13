@@ -1,26 +1,54 @@
-import * as React from "react"
+'use client'
+// YourComponent.tsx
+import * as React from 'react';
+import { useState } from 'react';
+import { Input } from '../ui/input';
 
-import { cn } from "@/lib/utils"
+// fetchCoinById.ts
+import axios from 'axios';
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Search = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-      placeholder="Search.."
-        type={type}
-        className={cn(
-          "flex h-8 w-44 rounded-sm border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 shadow-sm",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
+export const fetchCoinById = async (coinId: string) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SEARCH}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching coin data:', error);
+    throw error;
   }
-)
-Search.displayName = "Search"
+};
 
-export { Search }
+
+const YourComponent: React.FC = () => {
+  const [coinId, setCoinId] = useState<string>('');
+  const [coinData, setCoinData] = useState<any>(null);
+
+  const handleSearch = async () => {
+    try {
+      const data = await fetchCoinById(coinId);
+      setCoinData(data);
+    } catch (error) {
+      // Handle error if needed
+    }
+  };
+
+  return (
+    <div>
+      <Input
+        type="text"
+        placeholder="Enter Coin ID"
+        value={coinId}
+        onChange={(e) => setCoinId(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+
+      {coinData && (
+        <div>
+          <h2>{coinData.name}</h2>
+          <p>Symbol: {coinData.symbol}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default YourComponent;

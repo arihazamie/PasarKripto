@@ -42,20 +42,21 @@ const TrendingApp: React.FC = () => {
 
   return (
     <>
-      <Table id="TableRanking">
-      <TableCaption>A list of coins.</TableCaption>
-      <TableHeader>
+      <div className=" text-xl">Top Crypto Categories By Market Cap</div>
+      <div>View the largest cryptocurrency categories based on market capitalization.</div>
+      <Table>
+      <TableCaption>A list of Categories.</TableCaption>
+      <TableHeader className="text-left">
         <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>1</TableHead>
+          <TableHead>Categories</TableHead>
           <TableHead>1h%</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="text-left">
       {data.map((coin: CoinData) => (
         <TableRow key={coin.id}>
           <TableCell className="font-bold text-base">{coin.name}</TableCell>
-          <TableCell className={coin.market_cap_1h_change < 0 ? 'text-red-500' : 'text-green-500'}>{coin.market_cap_1h_change.toFixed(2)}</TableCell>
+          <TableCell className={coin.market_cap_1h_change < 0 ? 'text-red-500' : 'text-green-500'}>{coin.market_cap_1h_change.toFixed(2)} %</TableCell>
         </TableRow>
       ))}
       </TableBody>

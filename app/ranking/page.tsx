@@ -1,6 +1,6 @@
 import TableRanking from "@/components/readyToUse/table"
 
-const RangkingApp = async () => {
+const RangkingApp = () => {
 
     return (
         <div>

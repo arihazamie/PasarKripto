@@ -21,17 +21,15 @@ interface CoinData {
   id: string;
   name: string;
   symbol: string;
-  price: number;
+  price: string; // Change the type to string
   rank: number;
+  marketcap: string; // Change the type to string
   image: string;
-  marketcap: number;
-  volume24h: number;
-  percentage1h: any;
-  percentage24h: any;
-  percentage7d: any;
+  volume24h: number; // Change the type to string
+  percentage1h: number;
+  percentage24h: number;
+  percentage7d: number;
 }
-
-const itemsPerPage = 10
 
 const YourComponent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,65 +39,66 @@ const YourComponent: React.FC = () => {
 
   useEffect(() => {
     async function fetchCoinData() {
-
       setLoading(true);
       setError(null);
 
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${itemsPerPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`;
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en`;
+
+      console.log(currentPage)
 
       try {
         const response = await axios.get(url);
-        setData(response.data.map((coin: any) => ({
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          price: coin.current_price.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }),
-          rank: coin.market_cap_rank,
-          marketcap: coin.market_cap.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }),
-          image: coin.image,
-          volume24h: coin.total_volume.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }),
-          percentage1h: coin.price_change_percentage_1h_in_currency.toFixed(1),
-          percentage24h: coin.price_change_percentage_24h_in_currency.toFixed(1),
-          percentage7d: coin.price_change_percentage_7d_in_currency.toFixed(1),
-        })));
+        setData(
+          response.data.map((coin: any) => ({
+            id: coin.id,
+            name: coin.name,
+            symbol: coin.symbol,
+            price: coin.current_price.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }),
+            rank: coin.market_cap_rank,
+            marketcap: coin.market_cap.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }),
+            image: coin.image,
+            volume24h: coin.total_volume.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }),
+            percentage1h: coin.price_change_percentage_1h_in_currency.toFixed(1),
+            percentage24h: coin.price_change_percentage_24h_in_currency.toFixed(1),
+            percentage7d: coin.price_change_percentage_7d_in_currency.toFixed(1),
+          }))
+        );
       } catch (error) {
         console.error(error);
-        setError('Max fetching data');
+        setError('Error fetching data');
       } finally {
         setLoading(false);
       }
     }
 
-
     fetchCoinData();
   }, [currentPage]);
 
   const handleNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
+    setCurrentPage((currentPage) => currentPage + 1);
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prevPage => prevPage - 1);
+    if (currentPage >= 2) {
+      setCurrentPage((currentPage) => currentPage - 1);
     }
   };
 
   return (
     <>
-      <Table id="TableRanking">
+      <Table>
       <TableCaption>A list of coins.</TableCaption>
       <TableHeader>
-        <TableRow className="">
+        <TableRow>
           <TableHead>Rank</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Price</TableHead>
@@ -110,7 +109,7 @@ const YourComponent: React.FC = () => {
           <TableHead>Market Cap</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="h-auto">
+      <TableBody>
       {data.map((coin: CoinData) => (
         <TableRow key={coin.id}>
           <TableCell>{coin.rank}.</TableCell>
@@ -134,7 +133,7 @@ const YourComponent: React.FC = () => {
         <div>
           <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
           <span>Page {currentPage}</span>
-          <Button onClick={handleNextPage}>Next</Button>
+          <Button onClick={handleNextPage} disabled={currentPage === 4}>Next</Button>
         </div>
       </div>
     </>
