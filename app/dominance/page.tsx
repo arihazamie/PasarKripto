@@ -1,6 +1,11 @@
+import Apps from "@/components/readyToUse/dominance"
+
+
 const DominanceApp = () => {
     return (
-        <div></div>
+        <>
+            <Apps/>
+        </>
     )
 }
 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import GasTracker from './Gas';
-import { ModeToggle } from '../ui/darkmode';
+import Link from 'next/link';
 
 type GlobalData = {
   active_cryptocurrencies: number;
@@ -39,7 +39,7 @@ const NavbarAPI: React.FC = () => {
           <p><span className='text-gray-400'>Cryptos:</span> {data.active_cryptocurrencies}</p>
           <p><span className='text-gray-400'>Exchanges:</span> {data.markets}</p> 
           <p><span className='text-gray-400'>MarketCap:</span> <span className={data.market_cap_change_percentage_24h_usd < 0 ? 'text-red-500' : 'text-green-500'}>{data.market_cap_change_percentage_24h_usd.toFixed(2)}%</span></p>
-          <p><span className='text-gray-400'>Dominance:</span> BTC: {dom.btc.toFixed(1)}%  ETH: {dom.eth.toFixed(1)}%</p> 
+          <Link href={"/dominance"}><p><span className='text-gray-400'>Dominance:</span> BTC: {dom.btc.toFixed(1)}%</p> </Link>
           <GasTracker/> 
         </div>
       )}

@@ -89,6 +89,7 @@ const TrendingApp: React.FC = () => {
             <span className="font-bold text-base">{coin.name}</span>
             <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
           </div>
+          <TableCell></TableCell>
         </TableRow>
       ))}
       </TableBody>

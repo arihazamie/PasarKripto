@@ -4,6 +4,6 @@
 - TailwindCSS
 - Shadcn
 
-**API** (Free API) :
-- coingecko.com (30 hit/menit)
-- etherscan.io (5 hit/second)
+**API** :
+- coingecko.com
+- etherscan.io

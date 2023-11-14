@@ -74,7 +74,7 @@ const YourComponent: React.FC = () => {
         );
       } catch (error) {
         console.error(error);
-        setError('Error fetching data');
+        setError('Limit');
       } finally {
         setLoading(false);
       }
@@ -113,14 +113,14 @@ const YourComponent: React.FC = () => {
       {data.map((coin: CoinData) => (
         <TableRow key={coin.id}>
           <TableCell>{coin.rank}.</TableCell>
-          <Link href={"#"} className="flex gap-2 py-3">
+          <Link href={`ranking/${coin.id}`} className="flex gap-2 py-3">
             <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
             <span className="font-bold text-base">{coin.name}</span>
             <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span></Link>
           <TableCell>{coin.price}</TableCell>
-          <TableCell className={coin.percentage1h < 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage1h}</TableCell>
-          <TableCell className={coin.percentage24h < 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage24h}</TableCell>
-          <TableCell className={coin.percentage7d < 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage7d}</TableCell>
+          <TableCell className={coin.percentage1h < 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage1h} %</TableCell>
+          <TableCell className={coin.percentage24h < 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage24h} %</TableCell>
+          <TableCell className={coin.percentage7d < 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage7d} %</TableCell>
           <TableCell>{coin.volume24h}</TableCell>
           <TableCell>{coin.marketcap}</TableCell>
         </TableRow>

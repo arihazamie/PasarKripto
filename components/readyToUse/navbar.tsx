@@ -25,10 +25,10 @@ const components: { title: string; link: string; description: string }[] = [
         "A modal dialog that interrupts the user with important content and expects a response.",
     },
     {
-      title: "Hover Card",
-      link: "/",
+      title: "Exchange Rates",
+      link: "/exchange-rates",
       description:
-        "For sighted users to preview content available behind a link.",
+        "Bitcoin rate converted to Fiat Currency.",
     },
     {
       title: "Explorer",

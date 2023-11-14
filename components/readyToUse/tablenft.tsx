@@ -80,7 +80,7 @@ const NFTApp: React.FC = () => {
               <TableCell className="font-bold text-base text-left">{nft.name}</TableCell>
               <TableCell className="text-gray-400">{nft.symbol}</TableCell>
             </div>
-          <TableCell className="text-left">{nft.floor_price_in_native_currency} ETH</TableCell>
+          <TableCell className="text-left">{nft.floor_price_in_native_currency.toFixed(3)} ETH</TableCell>
           <TableCell className={nft.floor_price_24h_percentage_change < 0 ? 'text-red-500 text-left' : 'text-green-500 text-left'}>{nft.floor_price_24h_percentage_change.toFixed(1)} %</TableCell>
         </TableRow>
       ))}
