@@ -2,6 +2,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
 type GlobalData = {
   market_cap_percentage: any;
 };
@@ -30,21 +40,77 @@ const DominanceApp = () => {
   }
 
   return (
-    <div className="text-left text-xl">
+    <div className="text-left">
         <div className="py-10 text-center text-2xl">Dominance percentage as compared to other cryptocurrencies in the top ranking.</div>
-        <div className="ml-[35rem]">
-            <div>Bitcoin: {dom.btc ? dom.btc.toFixed(1) : 'N/A'}%</div>
-            <div className="py-5">Ethereum: {dom.btc ? dom.eth.toFixed(1) : 'N/A'}%</div>
-            <div>Usdt: {dom.btc ? dom.usdt.toFixed(1) : 'N/A'}%</div>
-            <div className="py-5">Binance Coin: {dom.btc ? dom.bnb.toFixed(1) : 'N/A'}%</div>
-            <div>Xrp: {dom.btc ? dom.xrp.toFixed(1) : 'N/A'}%</div>
-            <div className="py-5">Usdc: {dom.btc ? dom.usdc.toFixed(1) : 'N/A'}%</div>
-            <div>Solana: {dom.btc ? dom.sol.toFixed(1) : 'N/A'}%</div>
-            <div className="py-5">Lido Staked Ether: {dom.btc ? dom.steth.toFixed(1) : 'N/A'}%</div>
-            <div>Cardano: {dom.btc ? dom.ada.toFixed(1) : 'N/A'}%</div>
-            <div className="py-5">Dogecoin: {dom.btc ? dom.doge.toFixed(1) : 'N/A'}%</div>
+            <Table className="text-center">
+      <TableCaption className="my-5">A list of Dominance.</TableCaption>
+      <TableHeader>
+        <TableRow/>
+        <TableRow>
+          <TableHead className="text-center">No</TableHead>
+          <TableHead className="text-center">Name</TableHead>
+          <TableHead className="text-center">Percentages %</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody className="h-auto">
+          <TableRow>
+            <TableCell>1</TableCell>
+            <TableCell>Bitcoin Dominance</TableCell>
+            <TableCell className={dom.btc.toFixed(2) < dom.btc.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.btc ? dom.btc.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>2</TableCell>
+            <TableCell>Ethereum Dominance</TableCell>
+            <TableCell className={dom.eth.toFixed(2) < dom.eth.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.eth ? dom.eth.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>3</TableCell>
+            <TableCell>USDT Dominance</TableCell>
+            <TableCell className={dom.usdt.toFixed(2) < dom.usdt.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.usdt ? dom.usdt.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>4</TableCell>
+            <TableCell>BNB Dominance</TableCell>
+            <TableCell className={dom.bnb.toFixed(2) < dom.bnb.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.bnb ? dom.bnb.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>5</TableCell>
+            <TableCell>XRP Dominance</TableCell>
+            <TableCell className={dom.xrp.toFixed(2) < dom.xrp.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.xrp ? dom.xrp.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>6</TableCell>
+            <TableCell>SOL Dominance</TableCell>
+            <TableCell className={dom.sol.toFixed(2) < dom.sol.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.sol ? dom.sol.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>7</TableCell>
+            <TableCell>USDC Dominance</TableCell>
+            <TableCell className={dom.usdc.toFixed(2) < dom.usdc.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.usdc ? dom.usdc.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>8</TableCell>
+            <TableCell>STETH Dominance</TableCell>
+            <TableCell className={dom.steth.toFixed(2) < dom.steth.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.steth ? dom.steth.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>9</TableCell>
+            <TableCell>ADA Dominance</TableCell>
+            <TableCell className={dom.ada.toFixed(2) < dom.ada.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.ada ? dom.ada.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>10</TableCell>
+            <TableCell>DOGE Dominance</TableCell>
+            <TableCell className={dom.doge.toFixed(2) < dom.doge.toFixed(2) ? "text-red-400" : "text-green-400"}>{dom.doge ? dom.doge.toFixed(2) : 'N/A'} %</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+      </TableBody>
+    </Table>
         </div>
-    </div>
   );
 };
 
