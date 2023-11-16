@@ -1,11 +1,11 @@
-import TableRanking from "@/components/readyToUse/table"
+import Ranking from "@/components/readyToUse/table"
 
-const RangkingApp = () => {
-
+const RankingApp = () => {
     return (
-        <div>
-            <TableRanking/>
-        </div>
+        <>
+            <Ranking/>
+        </>
     )
 }
-export default RangkingApp
+
+export default RankingApp

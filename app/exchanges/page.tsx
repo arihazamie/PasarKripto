@@ -1,6 +1,10 @@
+import ExchangesApps from "@/components/readyToUse/exchanges"
+
 const ExchangeApp = () => {
     return (
-        <div></div>
+        <>
+            <ExchangesApps/>
+        </>
     )
 }
 
