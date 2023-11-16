@@ -5,13 +5,13 @@ import axios from 'axios';
 import Image from "next/image";
 
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table"
 
 interface NFTData {
@@ -62,31 +62,31 @@ const NFTApp: React.FC = () => {
 
   return (
     <>
-    <div className="text-xl">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
+      <div className="text-xl">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
       <Table>
-      <TableCaption>A list of NFTs.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Floor</TableHead>
-          <TableHead>24h%</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="h-auto">
-      {data.map((nft: NFTData) => (
-        <TableRow key={nft.id}>
-            <div className="flex m-0 p-0">
-              <Image src={nft.thumb} width={52} height={0} alt={nft.name}></Image>
-              <TableCell className="font-bold text-base text-left">{nft.name}</TableCell>
-              <TableCell className="text-gray-400">{nft.symbol}</TableCell>
-            </div>
-          <TableCell className="text-left">{nft.floor_price_in_native_currency.toFixed(3)} ETH</TableCell>
-          <TableCell className={nft.floor_price_24h_percentage_change < 0 ? 'text-red-500 text-left' : 'text-green-500 text-left'}>{nft.floor_price_24h_percentage_change.toFixed(1)} %</TableCell>
-        </TableRow>
-      ))}
-      </TableBody>
+        <TableCaption>A list of NFTs.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Floor</TableHead>
+            <TableHead>24h%</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="h-auto">
+          {data.map((nft: NFTData) => (
+            <TableRow key={nft.id}>
+              <div className="flex m-0 p-0">
+                <Image src={nft.thumb} width={52} height={0} alt={nft.name}></Image>
+                <TableCell className="font-bold text-base text-left">{nft.name}</TableCell>
+                <TableCell className="text-gray-400">{nft.symbol}</TableCell>
+              </div>
+              <TableCell className="text-left">{nft.floor_price_in_native_currency.toFixed(3)} ETH</TableCell>
+              <TableCell className={nft.floor_price_24h_percentage_change < 0 ? 'text-red-500 text-left' : 'text-green-500 text-left'}>{nft.floor_price_24h_percentage_change.toFixed(1)} %</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
-      </>
+    </>
   )
 }
 

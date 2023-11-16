@@ -1,11 +1,11 @@
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table"
 
 // Buat fungsi getStaticProps yang mengembalikan data sebagai props
@@ -24,14 +24,14 @@ const App = () => {
         </TableRow>
       </TableHeader>
       <TableBody className="h-auto">
-          <TableRow>
-            <TableCell>
-            </TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell className="text-right"></TableCell>
-          </TableRow>
+        <TableRow>
+          <TableCell>
+          </TableCell>
+          <TableCell></TableCell>
+          <TableCell></TableCell>
+          <TableCell></TableCell>
+          <TableCell className="text-right"></TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   )

@@ -6,13 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table"
 
 // Define an interface for the data
@@ -72,27 +72,27 @@ const TrendingApp: React.FC = () => {
     <>
       <div className=" text-xl">Top-7 trending Coins as Searched by Users in the last 24 hours</div>
       <Table id="TableRanking">
-      <TableCaption>A list of coins.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Rank</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Price</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="h-auto">
-      {data.map((coin: CoinData) => (
-        <TableRow key={coin.id}>
-          <TableCell className="text-left">{coin.rank}.</TableCell>
-          <div className="flex gap-2 py-3">
-            <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
-            <span className="font-bold text-base">{coin.name}</span>
-            <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
-          </div>
-          <TableCell></TableCell>
-        </TableRow>
-      ))}
-      </TableBody>
+        <TableCaption>A list of coins.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Rank</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Price</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="h-auto">
+          {data.map((coin: CoinData) => (
+            <TableRow key={coin.id}>
+              <TableCell className="text-left">{coin.rank}.</TableCell>
+              <div className="flex gap-2 py-3">
+                <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
+                <span className="font-bold text-base">{coin.name}</span>
+                <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
+              </div>
+              <TableCell></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </>
   )

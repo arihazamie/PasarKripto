@@ -65,16 +65,16 @@ const GasPriceComponent = () => {
           <ul className="">
             <li className="">
               <NavigationMenuLink asChild >
-              <div className="gap-5 flex p-3">
-                <p className="bg-opacity-100">Low: {gasPrices.safeGasPrice}</p>
-                <p>Average: {gasPrices.proposeGasPrice}</p>
-                <p>High: {gasPrices.fastGasPrice}</p>
-              </div>
+                <div className="gap-5 flex p-3">
+                  <p className="bg-opacity-100">Low: {gasPrices.safeGasPrice}</p>
+                  <p>Average: {gasPrices.proposeGasPrice}</p>
+                  <p>High: {gasPrices.fastGasPrice}</p>
+                </div>
               </NavigationMenuLink>
             </li>
           </ul>
         </NavigationMenuContent>
-      </NavigationMenuItem> 
+      </NavigationMenuItem>
     </NavigationMenu>
   );
 }

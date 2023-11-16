@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { ModeToggle } from '@/components/ui/darkmode'
 import DropDownMenu from "@/components/readyToUse/dropdown"
-import NavigationBar from '@/components/readyToUse/navbar'
+import NavigationBar from '@/components/readyToUse/Navbar/navbar'
 const gabarito = Gabarito({ subsets: ['latin'] })
 
 import React from 'react'
-import NavbarAPI from '@/components/readyToUse/navbarAPI'
-import {Input}  from '@/components/ui/input'
+import NavbarAPI from '@/components/readyToUse/Navbar/navbarAPI'
+import { Input } from '@/components/ui/input'
 
 export const metadata: Metadata = {
   title: 'PasarKripto',
@@ -34,10 +34,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="hidden lg:block">
                 <NavigationBar />
               </div>
-              <Input/>
-              <ModeToggle/>
+              <Input />
+              <ModeToggle />
             </div>
-            <NavbarAPI/>
+            <NavbarAPI />
             {children}
           </ThemeProvider>
         </div>

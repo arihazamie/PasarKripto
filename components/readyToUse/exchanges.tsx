@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 import balancer from "@/public/Image/balancer-v2-avalanche.jpg"
 
 import {
@@ -53,7 +54,7 @@ const ExchangesApp = () => {
 
   useEffect(() => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/exchanges?per_page=100&page=${currentPage}`;
-    
+
     axios.get(apiUrl)
       .then(response => {
         setExchangeData(response.data);
@@ -87,26 +88,26 @@ const ExchangesApp = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-        {exchangeData.map(exchange => (
+          {exchangeData.map(exchange => (
             <TableRow key={exchange.id}>
               <TableCell>{exchange.trust_score_rank}</TableCell>
-              <div className="flex text-left">
-              <Image
-                src={exchange.image === "missing_small.png" ? balancer : exchange.image}
-                width={50}
-                height={50}
-                alt={exchange.name}
-              />
+              <Link href={`/exchanges/${exchange.id}`} className="flex text-left" prefetch>
+                <Image
+                  src={exchange.image === "missing_small.png" ? balancer : exchange.image}
+                  width={50}
+                  height={50}
+                  alt={exchange.name}
+                />
                 <TableCell className='font-bold text-base'>{exchange.name}</TableCell>
-              </div>
+              </Link>
               <TableCell className='text-center'>
-                {exchange.trust_score ?? "null"} 
+                {exchange.trust_score ?? "null"}
               </TableCell>
               <TableCell className='text-center'>
                 {exchange.year_established ?? "null"}
               </TableCell>
               <TableCell className='text-green-500'>
-              {(
+                {(
                   exchange.trade_volume_24h_btc *
                   (bitcoinData ? bitcoinData.market_data.current_price.usd : 1)
                 ).toLocaleString('en-US', {

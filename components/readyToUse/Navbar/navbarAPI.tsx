@@ -14,6 +14,7 @@ type GlobalData = {
 
 const NavbarAPI: React.FC = () => {
   const [data, setData] = useState<GlobalData | null>(null);
+  const [totalMarketCap, setTotalMarketCap] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,16 +32,25 @@ const NavbarAPI: React.FC = () => {
 
   const dom = data?.market_cap_percentage
 
+  if (!dom) {
+    return <div className="text-center">Loading...</div>;
+  }
 
   return (
     <div className='w-full -z-20 border-b-2'>
       {data && (
         <div className={'flex gap-20 text-center items-center justify-center shadow-sm mx-10'}>
-          <p><span className='text-gray-400'>Cryptos:</span> {data.active_cryptocurrencies}</p>
-          <p><span className='text-gray-400'>Exchanges:</span> {data.markets}</p> 
+          <Link href={"/ranking"} className='hover:underline hover:transition-all'>
+            <span className='text-gray-400'>Cryptos: </span>
+            {data.active_cryptocurrencies}
+          </Link>
+          <Link href={"/exchanges"} className='hover:underline hover:transition-all'>
+            <span className='text-gray-400'>Exchanges:</span>
+            {data.markets}
+          </Link>
           <p><span className='text-gray-400'>MarketCap:</span> <span className={data.market_cap_change_percentage_24h_usd < 0 ? 'text-red-500' : 'text-green-500'}>{data.market_cap_change_percentage_24h_usd.toFixed(2)}%</span></p>
           <Link href={"/dominance"}><p><span className='text-gray-400'>Dominance:</span> BTC: {dom.btc.toFixed(1)}%</p> </Link>
-          <GasTracker/> 
+          <GasTracker />
         </div>
       )}
     </div>

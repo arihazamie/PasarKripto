@@ -1,7 +1,7 @@
 import Apps from "@/components/readyToUse/dominance"
 
 
-const DominanceApp = () => {
+const Page = () => {
     return (
         <>
             <Apps/>
@@ -9,4 +9,4 @@ const DominanceApp = () => {
     )
 }
 
-export default DominanceApp
+export default Page

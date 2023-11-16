@@ -1,4 +1,4 @@
-import Ranking from "@/components/readyToUse/table"
+import Ranking from "@/components/readyToUse/Ranking"
 
 const RankingApp = () => {
     return (
