@@ -10,18 +10,37 @@ type GlobalData = {
   markets: number;
   market_cap_change_percentage_24h_usd: any;
   market_cap_percentage: any;
+  total_market_cap: {
+    usd: number;
+  };
+  total_volume: {
+    usd: number;
+  };
+};
+
+const abbreviateNumber = (value: number, decimalPlaces: number): string => {
+  const suffixes = ["", "K", "M", "B", "T"];
+  const tier = Math.log10(Math.abs(value)) / 3 | 0;
+
+  if (tier === 0) return value.toFixed(decimalPlaces);
+
+  const suffix = suffixes[tier];
+  const scale = Math.pow(10, tier * 3);
+
+  const scaledValue = value / scale;
+
+  return `${scaledValue.toFixed(decimalPlaces)}${suffix}`;
 };
 
 const NavbarAPI: React.FC = () => {
   const [data, setData] = useState<GlobalData | null>(null);
-  const [totalMarketCap, setTotalMarketCap] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/global`);
-        const { active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage } = response.data.data;
-        setData({ active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage });
+        const { active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage, total_market_cap, total_volume } = response.data.data;
+        setData({ active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage, total_market_cap, total_volume });
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -37,19 +56,35 @@ const NavbarAPI: React.FC = () => {
   }
 
   return (
-    <div className='w-full -z-20 border-b-2'>
+    <div className='w-full -z-20 border-b-2 text-sm'>
       {data && (
         <div className={'flex gap-20 text-center items-center justify-center shadow-sm mx-10'}>
-          <Link href={"/ranking"} className='hover:underline hover:transition-all'>
-            <span className='text-gray-400'>Cryptos: </span>
+          <Link href={"/ranking"} className="transition-all duration-300 hover:text-[#7071E8]">
+            <span className="text-gray-400">Cryptos: </span>
             {data.active_cryptocurrencies}
           </Link>
-          <Link href={"/exchanges"} className='hover:underline hover:transition-all'>
-            <span className='text-gray-400'>Exchanges:</span>
+          <Link href={"/exchanges"} className="transition-all duration-300 hover:text-[#7071E8]">
+            <span className='text-gray-400'>Exchanges: </span>
             {data.markets}
           </Link>
-          <p><span className='text-gray-400'>MarketCap:</span> <span className={data.market_cap_change_percentage_24h_usd < 0 ? 'text-red-500' : 'text-green-500'}>{data.market_cap_change_percentage_24h_usd.toFixed(2)}%</span></p>
-          <Link href={"/dominance"}><p><span className='text-gray-400'>Dominance:</span> BTC: {dom.btc.toFixed(1)}%</p> </Link>
+          <p className="transition-all duration-300 hover:text-[#7071E8]">
+            <span className='text-gray-400'>Market Cap: </span>
+            <span>${abbreviateNumber(data.total_market_cap.usd, 3)} </span>
+            <span
+              className={data.market_cap_change_percentage_24h_usd < 0 ? 'text-red-500' : 'text-green-500'}>
+              {data.market_cap_change_percentage_24h_usd.toFixed(2)}%
+            </span>
+          </p>
+          <p className="transition-all duration-300 hover:text-[#7071E8]">
+            <span className='text-gray-400'>24h Vol: </span>
+            <span>${abbreviateNumber(data.total_volume.usd, 1)}</span>
+          </p>
+          <Link href={"/dominance"} className="transition-all duration-300 hover:text-[#7071E8]">
+            <p>
+              <span className='text-gray-400'>Dominance: </span> 
+              BTC: {dom.btc.toFixed(1)}%
+            </p> 
+          </Link>
           <GasTracker />
         </div>
       )}

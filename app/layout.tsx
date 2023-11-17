@@ -25,7 +25,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="z-50" id="Navbar">
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="flex justify-center items-center gap-16 py-4">
-              <Link href={"/"} className="text-3xl font-bold">
+              <Link href={"/"} className="text-3xl font-bold transition-all duration-300 hover:text-[#7071E8]">
                 PasarKripto
               </Link>
               <div className="md:hidden">

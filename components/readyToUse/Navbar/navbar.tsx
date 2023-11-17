@@ -65,7 +65,7 @@ export default function NavigationBar() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-xl">Get Started</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-xl transition-all duration-300 hover:text-[#7071E8]">Get Started</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -105,7 +105,7 @@ export default function NavigationBar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-xl">Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-xl transition-all duration-300 hover:text-[#7071E8]">Components</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (

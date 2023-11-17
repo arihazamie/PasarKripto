@@ -49,14 +49,12 @@ const GasPriceComponent = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const HoverText = "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-
   return (
 
-    <NavigationMenu className='list-none z-10'>
+    <NavigationMenu className='list-none z-10 text-sms'>
       <NavigationMenuItem className="">
         <NavigationMenuTrigger className="text-base">
-          <div className='flex gap-1'>
+          <div className='flex gap-1 hover:text-[#7071E8]'>
             <p className='text-gray-400'>Gas: </p>
             <p> Average: {gasPrices.proposeGasPrice}</p>
           </div>
