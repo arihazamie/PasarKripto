@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { Skeleton } from "@/components/ui/skeleton"
 
 import { cn } from "@/lib/utils"
 
@@ -55,8 +56,6 @@ const components: { title: string; link: string; description: string }[] = [
   },
 ]
 
-
-
 export default function NavigationBar() {
 
   const HoverText = "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
@@ -83,22 +82,22 @@ export default function NavigationBar() {
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <Link href="/ranking" className={HoverText}>
+              <Link href="/cryptocurrencies" className={HoverText}>
                 <div className="text-sm">
-                  <div>Ranking</div>
-                  <div className="text-gray-400">Best Cryptocurrencies by MarketCap</div>
+                  <div>Cryptocurrencies</div>
+                  <div className="text-gray-400">Cryptocurrency Prices by Market Cap</div>
+                </div>
+              </Link>
+              <Link href="/exchanges" className={HoverText}>
+                <div className="text-sm">
+                  <div>Exchanges</div>
+                  <div className="text-gray-400">Crypto Exchanges Ranked by Trust Score</div>
                 </div>
               </Link>
               <Link href="/trending" className={HoverText}>
                 <div className="text-sm">
                   <div>Trending</div>
-                  <div className="text-gray-400">Top Coins & NFT in the last 24 Hours</div>
-                </div>
-              </Link>
-              <Link href="/most" className={HoverText}>
-                <div className="text-sm">
-                  <div>Gainers & Losers</div>
-                  <div className="text-gray-400">Rising and Falling Cryptocurrencies</div>
+                  <div className="text-gray-400">Top Trending in 24H</div>
                 </div>
               </Link>
             </ul>

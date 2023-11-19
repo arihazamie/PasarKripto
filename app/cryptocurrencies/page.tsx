@@ -1,4 +1,4 @@
-import Ranking from "@/components/readyToUse/Ranking"
+import Ranking from "@/components/readyToUse/Cryptocurrencies/Ranking"
 
 const RankingApp = () => {
     return (

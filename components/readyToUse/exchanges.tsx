@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import balancer from "@/public/Image/balancer-v2-avalanche.jpg"
+import { Skeleton } from '../ui/skeleton';
 
 import {
   Table,
@@ -22,7 +23,6 @@ export interface Exchange {
   trust_score_rank: number;
   image: string;
   trust_score: number;
-  year_established: number;
   trade_volume_24h_btc: number;
   market_data: {
     current_price: {
@@ -34,9 +34,9 @@ export interface Exchange {
 const ExchangesApp = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
-
   const [exchangeData, setExchangeData] = useState<Exchange[]>([]);
   const [bitcoinData, setBitcoinData] = useState<Exchange | null>(null);
+  const [isLoading, setIsLoading] = useState(true)
 
 
   useEffect(() => {
@@ -55,14 +55,30 @@ const ExchangesApp = () => {
   useEffect(() => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/exchanges?per_page=100&page=${currentPage}`;
 
+    setIsLoading(true)
+
     axios.get(apiUrl)
       .then(response => {
         setExchangeData(response.data);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Set isLoading to false once the data is fetched (whether success or error)
       });
   }, [currentPage]);
+
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center gap-32 mt-5'>
+        <Skeleton className='w-40 h-14 my-5'/>
+        <Skeleton className='w-80 h-14 my-5'/>
+        <Skeleton className='w-40 h-14 my-5'/>
+        <Skeleton className='w-40 h-14 my-5'/>
+      </div>
+    );
+  }
 
   const handleNextPage = () => {
     setCurrentPage((currentPage) => currentPage + 1);
@@ -83,7 +99,6 @@ const ExchangesApp = () => {
             <TableHead>Rank</TableHead>
             <TableHead>Name</TableHead>
             <TableHead className='text-center'>Trust Score</TableHead>
-            <TableHead className='text-center'>Year Established</TableHead>
             <TableHead>Volume 24h</TableHead>
           </TableRow>
         </TableHeader>
@@ -102,9 +117,6 @@ const ExchangesApp = () => {
               </Link>
               <TableCell className='text-center'>
                 {exchange.trust_score ?? "null"}
-              </TableCell>
-              <TableCell className='text-center'>
-                {exchange.year_established ?? "null"}
               </TableCell>
               <TableCell className='text-green-500'>
                 {(
