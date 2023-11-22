@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../../ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useRouter } from "next/router"
 
 import {
   Table,
@@ -76,14 +77,14 @@ const YourComponent: React.FC = () => {
   }, [currentPage])
 
   const handleNextPage = () => {
-    setCurrentPage((currentPage) => currentPage + 1)
-  }
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage((currentPage) => currentPage - 1)
+      setCurrentPage((currentPage) => currentPage - 1);
     }
-  }
+  };
 
   return (
     <>
@@ -107,17 +108,17 @@ const YourComponent: React.FC = () => {
               <TableCell>{coin.rank}.</TableCell>
               <TableCell>
                 <Link href={`cryptocurrencies/${coin.id}`}>
-                  <a className="flex gap-2 py-3">
+                  <div className="flex gap-2 py-3">
                     <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
                     <span className="font-bold text-base">{coin.name}</span>
                     <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
-                  </a>
+                  </div>
                 </Link>
               </TableCell>
               <TableCell>${`${coin.price <= 0.0001 ? coin.price : coin.price.toLocaleString()}`}</TableCell>
-              <TableCell className={coin.percentage1h <= 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage1h} %</TableCell>
-              <TableCell className={coin.percentage24h <= 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage24h} %</TableCell>
-              <TableCell className={coin.percentage7d <= 0.0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage7d} %</TableCell>
+              <TableCell className={coin.percentage1h <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage1h} %</TableCell>
+              <TableCell className={coin.percentage24h <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage24h} %</TableCell>
+              <TableCell className={coin.percentage7d <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.percentage7d} %</TableCell>
               <TableCell className="text-right">{coin.volume24h}</TableCell>
               <TableCell>{coin.marketcap}</TableCell>
             </TableRow>

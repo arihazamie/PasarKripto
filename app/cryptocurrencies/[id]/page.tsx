@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Hovers from "@/components/readyToUse/HoverAlert/ranking";
-import ExplorerApp from "@/components/readyToUse/Cryptocurrencies/id/Explorer";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
 
 
 import { BsGlobe2 } from "react-icons/bs"
@@ -23,6 +30,7 @@ import {
   TableCaption,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
+import { MdOutlineOpenInNew } from "react-icons/md";
 
 interface PageProps {
   params: {
@@ -85,7 +93,7 @@ interface PageData {
       github: string
     }
   }
-
+  categories: string
 }
 
 const Page: React.FC<PageProps> = ({ params: { id } }) => {
@@ -98,7 +106,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
 
       try {
         const response = await axios.get<PageData>(url);
-        setData(response.data);
+        setData(response.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -260,7 +268,62 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
               </Link>
 
               <div>
-                <ExplorerApp />
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">Explorer</NavigationMenuTrigger>
+                      <NavigationMenuContent className="p-3">
+                        {Array.isArray(data.links.blockchain_site) ? (
+                          <ul className="grid gap-2">
+                            {data.links.blockchain_site
+                              .filter((url: string) => url !== "")
+                              .map((url: string, index: number) => {
+                                const domainName = new URL(url).hostname;
+                                return (
+                                  <li className="row-span-1" key={index}>
+                                    <Link href={url} target="_blank" className="underline">
+                                      <div className="text-sm flex items-center gap-1 hover:bg-MyPurple/50 p-1 rounded">
+                                        <div>{domainName}</div>
+                                        <MdOutlineOpenInNew />
+                                      </div>
+                                    </Link>
+                                  </li>
+                                );
+                              })}
+                          </ul>
+                        ) : null}
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
+
+              <div>
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">Categories</NavigationMenuTrigger>
+                      <NavigationMenuContent className="p-3">
+                        {Array.isArray(data.categories) ? (
+                          <ul className="grid gap-2">
+                            {data.categories
+                              .map((url: string, index: number) => {
+                                return (
+                                  <li className="row-span-1" key={index}>
+                                    <div>
+                                      <div className="bg-MyPurple/50 rounded-md p-1">
+                                        <div>{url}</div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                          </ul>
+                        ) : null}
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
               </div>
             </div>
           </div>
@@ -270,4 +333,4 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
   );
 };
 
-export default Page;
+export default Page

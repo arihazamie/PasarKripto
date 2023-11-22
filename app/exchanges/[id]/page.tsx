@@ -43,7 +43,6 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
       {data && (
         <div>
           <div>{data.name}</div>
-          <div>{}</div>
         </div>
       )}
     </>

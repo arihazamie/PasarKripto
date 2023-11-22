@@ -20,10 +20,10 @@ import { title } from "process"
 
 const components: { title: string; link: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    link: "/",
+    title: "Bitcoin Halving",
+    link: "/bitcoin-halving",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "prescheduled event where the reward for mining and verifying new blocks is reduced by 50%.",
   },
   {
     title: "Exchange Rates",
@@ -64,7 +64,7 @@ export default function NavigationBar() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-xl transition-all duration-300 hover:text-[#7071E8]">Get Started</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-xl hover:text-[#7071E8]  hover:bg-MyPurple/10 transition-all duration-300">Get Started</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -104,7 +104,7 @@ export default function NavigationBar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-xl transition-all duration-300 hover:text-[#7071E8]">Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-xl hover:text-[#7071E8] hover:bg-MyPurple/10 transition-all duration-300">Components</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (

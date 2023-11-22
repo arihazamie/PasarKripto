@@ -39,7 +39,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <NavbarAPI />
             {children}
-          </ThemeProvider>
+            </ThemeProvider>
         </div>
       </body>
     </html>

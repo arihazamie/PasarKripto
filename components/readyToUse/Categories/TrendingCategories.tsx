@@ -32,6 +32,7 @@ const TrendingApp: React.FC = () => {
         const response = await axios.get<{ categories: CoinData[] }>(url);
 
         setData(response.data.categories);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
