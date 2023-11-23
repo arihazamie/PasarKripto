@@ -113,7 +113,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
     }
 
     getData();
-  }, [setData]);
+  }, [id ,setData]);
 
   return (
     <>

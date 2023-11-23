@@ -11,6 +11,7 @@ const gabarito = Gabarito({ subsets: ['latin'] })
 import React from 'react'
 import NavbarAPI from '@/components/readyToUse/Navbar/navbarAPI'
 import { Input } from '@/components/ui/input'
+import MobileNav from "@/components/readyToUse/Navbar/MobileNavbar"
 
 export const metadata: Metadata = {
   title: 'PasarKripto',
@@ -24,22 +25,24 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className={gabarito.className}>
         <div className="z-50" id="Navbar">
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <div className="flex justify-center items-center gap-16 py-4">
-              <Link href={"/"} className="text-3xl font-bold transition-all duration-300 hover:text-[#7071E8]">
+            <div className="flex justify-center items-center md:gap-16 gap-7 py-4">
+              <Link href={"/"} className="md:text-3xl text-2xl font-bold transition-all duration-300 hover:text-MyPurple">
                 PasarKripto
               </Link>
-              <div className="md:hidden">
-                <DropDownMenu />
-              </div>
               <div className="hidden lg:block">
                 <NavigationBar />
               </div>
               <Input />
-              <ModeToggle />
+              <div className="md:hidden">
+                <MobileNav />
+              </div>
+              <div className="hidden md:block">
+                <ModeToggle />
+              </div>
             </div>
             <NavbarAPI />
             {children}
-            </ThemeProvider>
+          </ThemeProvider>
         </div>
       </body>
     </html>
