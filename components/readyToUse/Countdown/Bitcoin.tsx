@@ -79,15 +79,15 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
                     <div className='text-xl' >Seconds</div>
                 </div>
             </div>
-            <div className='text-xl'>
+            <div className='text-xl my-10'>
                 <div>Current Block at <span className='underline'>{data.data.blocks.toLocaleString()}</span></div>
                 <div>Bitcoin Halving at Block <span className='underline'>{Halving.toLocaleString()}</span></div>
                 <div><span className='underline'>{Math.abs(data.data.blocks - 840000).toLocaleString()}</span> Blocks to go...</div>
             </div>
-            <div>
+            <div className='my-10'>
                 <Card />
             </div>
-            <div className='md:text-xl text-lg md:mx-60 mt-10 mx-5'>
+            <div className='md:text-xl text-lg md:mx-60 my-10 mx-5'>
                 <AccordionCountdown />
             </div>
         </div>

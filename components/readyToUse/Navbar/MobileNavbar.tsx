@@ -27,13 +27,13 @@ const Page = () => {
                 <SheetTrigger>
                     <GiHamburgerMenu> </GiHamburgerMenu>
                 </SheetTrigger>
-                <SheetContent className="w-full">
-                    <div className="w-full relative">
+                <SheetContent className="">
+                    <div className="flex relative">
                         <div className="flex justify-end">
                             <ModeToggle />
                         </div>
-                        <div className="w-full">
-                            <Accordion type="single" collapsible>
+                        <div className="">
+                            <Accordion type="multiple">
                                 <AccordionItem value="item-1">
                                     <AccordionTrigger>Get Started</AccordionTrigger>
                                     <AccordionContent className="text-xl text-center hover:underline">

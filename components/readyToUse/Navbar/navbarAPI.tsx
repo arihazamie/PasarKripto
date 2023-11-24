@@ -61,21 +61,21 @@ const NavbarAPI: React.FC = () => {
   if (!dom) {
     return (
       <div className='flex gap-5 items-center text-center justify-center'>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
-        <Skeleton className='w-36 h-10'/>
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
+        <Skeleton className='w-36 h-10' />
       </div>
     )
   }
 
   return (
-    <div className='w-full -z-20 border-b-2 text-sm'>
+    <div className='w-full -z-20 border-b-2 text-sm hidden'>
       {data && (
-        <div className={'flex gap-20 text-center items-center justify-center shadow-sm mx-10'}>
+        <div className={'flex md:gap-20 gap-32 text-center items-center justify-center shadow-sm md:mx-10 mx-0'}>
           <Link href={"/ranking"} className="transition-all duration-300 hover:text-[#7071E8]">
             <span className="text-gray-400">Cryptos: </span>
             {data.active_cryptocurrencies}
@@ -84,18 +84,18 @@ const NavbarAPI: React.FC = () => {
             <span className='text-gray-400'>Exchanges: </span>
             {data.markets}
           </Link>
-          <p className="transition-all duration-300 hover:text-[#7071E8]">
+          <Link href={"#"} className="transition-all duration-300 hover:text-[#7071E8]">
             <span className='text-gray-400'>Market Cap: </span>
             <span>${abbreviateNumber(data.total_market_cap.usd, 3)} </span>
             <span
               className={data.market_cap_change_percentage_24h_usd < 0 ? 'text-red-500' : 'text-green-500'}>
               {data.market_cap_change_percentage_24h_usd.toFixed(2)}%
             </span>
-          </p>
-          <p className="transition-all duration-300 hover:text-[#7071E8]">
+          </Link>
+          <Link href={"#"} className="transition-all duration-300 hover:text-[#7071E8]">
             <span className='text-gray-400'>24h Vol: </span>
             <span>${abbreviateNumber(data.total_volume.usd, 1)}</span>
-          </p>
+          </Link>
           <Link href={"/dominance"} className="transition-all duration-300 hover:text-[#7071E8]">
             <p>
               <span className='text-gray-400'>Dominance: </span>
