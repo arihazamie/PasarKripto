@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/ui/theme-provider'
 import { ModeToggle } from '@/components/ui/darkmode'
 import NavigationBar from '@/components/readyToUse/Navbar/navbar'
 const gabarito = Gabarito({ subsets: ['latin'] })
+import { Analytics } from '@vercel/analytics/react';
 
 import React from 'react'
 import NavbarAPI from '@/components/readyToUse/Navbar/navbarAPI'
@@ -98,6 +99,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <NavbarAPI />
             {children}
+            <Analytics />
           </ThemeProvider>
         </div>
       </body>
