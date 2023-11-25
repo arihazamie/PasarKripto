@@ -17,11 +17,11 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'PasarKripto',
   description: 'PasarKripto, Crypto, MarketCrypto',
-  publisher: 'AriHazamie',
+  publisher: 'Ari Hazamie',
   applicationName: 'PasarKripto',
   keywords: ['PasarKripto', 'Crypto', 'MarketCrypto'],
-  authors: [{ name: 'AriHazamie', url: 'https://github.com/AriHazamie' }],
-  creator: 'AriHazamie',
+  authors: [{ name: 'Ari Hazamie', url: 'https://github.com/AriHazamie' }],
+  creator: 'Ari Hazamie',
   openGraph: {
     title: 'PasarKripto',
     description: 'PasarKripto, Crypto, MarketCrypto',

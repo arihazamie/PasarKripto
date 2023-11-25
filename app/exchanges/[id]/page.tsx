@@ -26,7 +26,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
   useEffect(() => {
     async function getData() {
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/exchanges/${id}`
-
+  
       try {
         const response = await axios.get<PageData>(url)
         setData(response.data)
@@ -34,8 +34,9 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
         console.error("Error fetching data:", error)
       }
     }
+  
     getData()
-  }, [setData])
+  }, [id])
 
 
   return (

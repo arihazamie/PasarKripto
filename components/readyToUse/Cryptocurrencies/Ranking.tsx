@@ -5,8 +5,6 @@ import axios from 'axios'
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../../ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useRouter } from "next/router"
 
 import {
   Table,
@@ -93,11 +91,14 @@ const YourComponent: React.FC = () => {
                 </Link>
               </TableCell>
               <TableCell>${`${coin.current_price <= 0.0001 ? coin.current_price : coin.current_price.toLocaleString()}`}</TableCell>
-              <TableCell className={coin.price_change_percentage_1h_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.price_change_percentage_1h_in_currency} %
+              <TableCell className={coin.price_change_percentage_1h_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>
+                {coin.price_change_percentage_1h_in_currency !== null ? coin.price_change_percentage_1h_in_currency.toFixed(2) : ''} %
               </TableCell>
-              <TableCell className={coin.price_change_percentage_24h_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.price_change_percentage_24h_in_currency} %
+              <TableCell className={coin.price_change_percentage_24h_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>
+                {coin.price_change_percentage_24h_in_currency !== null ? coin.price_change_percentage_24h_in_currency.toFixed(2) : ''} %
               </TableCell>
-              <TableCell className={coin.price_change_percentage_7d_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>{coin.price_change_percentage_7d_in_currency.toFixed(1)}
+              <TableCell className={coin.price_change_percentage_7d_in_currency <= 0 ? 'text-red-500' : 'text-green-500'}>
+                {coin.price_change_percentage_7d_in_currency !== null ? coin.price_change_percentage_7d_in_currency.toFixed(2) : ''} %
               </TableCell>
               <TableCell className="text-right">${coin.total_volume.toLocaleString()}</TableCell>
               <TableCell>${coin.market_cap.toLocaleString()}</TableCell>
