@@ -84,7 +84,7 @@ const YourComponent: React.FC = () => {
               <TableCell>
                 <Link href={`cryptocurrencies/${coin.id}`}>
                   <div className="flex gap-2 py-3">
-                    <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
+                    <Image src={coin.image} width={24} height={24} alt={coin.name + 'Image'}></Image>
                     <span className="font-bold text-base">{coin.name}</span>
                     <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
                   </div>

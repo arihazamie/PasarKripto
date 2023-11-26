@@ -6,7 +6,6 @@ import { ThemeProvider } from '@/components/ui/theme-provider'
 import { ModeToggle } from '@/components/ui/darkmode'
 import NavigationBar from '@/components/readyToUse/Navbar/navbar'
 const gabarito = Gabarito({ subsets: ['latin'] })
-import { Analytics } from '@vercel/analytics/react';
 
 import React from 'react'
 import NavbarAPI from '@/components/readyToUse/Navbar/navbarAPI'
@@ -81,7 +80,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="flex justify-center items-center md:gap-12 gap-7 py-4">
               <Link href={"/"} className=" flex items-center gap-2">
-                <Image src={Logo} width={50} height={50} alt='PasarKripto' className='hidden md:block' />
+                <Image src={Logo} width={50} height={50} alt='PasarKripto Image' className='hidden md:block' />
                 <div className='md:text-3xl text-2xl font-bold transition-all duration-300 hover:text-MyPurple'>
                   PasarKripto
                 </div>
@@ -89,7 +88,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="hidden lg:block">
                 <NavigationBar />
               </div>
-              <Input />
+              {/* <Input /> */}
               <div className="md:hidden">
                 <MobileNav />
               </div>
@@ -99,7 +98,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <NavbarAPI />
             {children}
-            <Analytics />
           </ThemeProvider>
         </div>
       </body>
