@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import balancer from "@/public/Image/balancer-v2-avalanche.jpg"
 import { Skeleton } from '../ui/skeleton';
+import { ScrollArea } from '../ui/scroll-area';
 
 import {
   Table,
@@ -71,11 +72,18 @@ const ExchangesApp = () => {
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center gap-32 mt-5'>
-        <Skeleton className='w-40 h-14 my-5'/>
-        <Skeleton className='w-80 h-14 my-5'/>
-        <Skeleton className='w-40 h-14 my-5'/>
-        <Skeleton className='w-40 h-14 my-5'/>
+      <div className='mx-5 text-center items-center justify-center mb-10'>
+        <Skeleton className='flex h-10 mx-[33rem] my-5 items-center text-center justify-center' />
+        <div className='w-full h-[32rem] rounded-md border-2 bg-slate-800'>
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+        </div>
       </div>
     );
   }
@@ -91,54 +99,56 @@ const ExchangesApp = () => {
   };
 
   return (
-    <>
+    <div className='mx-5'>
+      <div className='text-2xl font-bold text-center my-5'>Exchanges</div>
       <Table className="w-full h-auto">
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Rank</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead className='text-center'>Trust Score</TableHead>
-            <TableHead>Volume 24h</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {exchangeData.map(exchange => (
-            <TableRow key={exchange.id}>
-              <TableCell>{exchange.trust_score_rank}</TableCell>
-              <Link href={`/exchanges/${exchange.id}`} className="flex text-left" prefetch>
-                <Image
-                  src={exchange.image === "missing_small.png" ? balancer : exchange.image}
-                  width={50}
-                  height={50}
-                  alt={exchange.name}
-                />
-                <TableCell className='font-bold text-base'>{exchange.name}</TableCell>
-              </Link>
-              <TableCell className='text-center'>
-                {exchange.trust_score ?? "null"}
-              </TableCell>
-              <TableCell className='text-green-500'>
-                {(
-                  exchange.trade_volume_24h_btc *
-                  (bitcoinData ? bitcoinData.market_data.current_price.usd : 1)
-                ).toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </TableCell>
+        <ScrollArea className='w-full h-[32rem] rounded-md border-2'>
+          <TableHeader className='sticky top-0 bg-MyPurple text-white'>
+            <TableRow>
+              <TableHead>Rank</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead className='text-center'>Trust Score</TableHead>
+              <TableHead>Volume 24h</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
+          </TableHeader>
+          <TableBody>
+            {exchangeData.map(exchange => (
+              <TableRow key={exchange.id}>
+                <TableCell>{exchange.trust_score_rank}</TableCell>
+                <Link href={`/exchanges/${exchange.id}`} className="flex text-left" prefetch>
+                  <Image
+                    src={exchange.image === "missing_small.png" ? balancer : exchange.image}
+                    width={50}
+                    height={50}
+                    alt={exchange.name}
+                  />
+                  <TableCell className='font-bold text-base'>{exchange.name}</TableCell>
+                </Link>
+                <TableCell className='text-center'>
+                  {exchange.trust_score ?? "null"}
+                </TableCell>
+                <TableCell className='text-green-500'>
+                  {(
+                    exchange.trade_volume_24h_btc *
+                    (bitcoinData ? bitcoinData.market_data.current_price.usd : 1)
+                  ).toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  })}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </ScrollArea>
       </Table>
-      <div className="items-center justify-center text-center">
+      <div className="items-center justify-center text-center mt-5">
         <div>
           <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>
           <span>Page {currentPage}</span>
           <Button onClick={handleNextPage} disabled={currentPage === 7}>Next</Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

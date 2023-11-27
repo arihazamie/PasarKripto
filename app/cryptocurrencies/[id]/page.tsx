@@ -139,7 +139,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
     }
 
     getData()
-  }, [])
+  }, [id])
 
   const athDate = () => {
     const date = data?.market_data.ath_date
@@ -174,7 +174,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           <Skeleton className="w-36 h-10 mt-16" />
         </div>
         <div className="text-center items-center justify-center flex">
-          <Skeleton className="w-96 h-10 mt-10" />
+          <Skeleton className="w-96 h-10 mt-5" />
         </div>
         <div className="text-center items-center justify-center flex gap-10">
           <Skeleton className="w-28 h-10 mt-10" />
@@ -183,18 +183,20 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
         </div>
         <div className="md:flex block text-left gap-4 mx-52">
           <div className="w-1/2">
-            <Skeleton className="w-full h-10 mt-5" />
-            <Skeleton className="w-full h-10 mt-5" />
-            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-3" />
+            <Skeleton className="w-full h-10 mt-3" />
+            <Skeleton className="w-full h-10 mt-3" />
           </div>
           <div className="w-1/2">
-            <Skeleton className="w-full h-10 mt-5" />
-            <Skeleton className="w-full h-10 mt-5" />
-            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-3" />
+            <Skeleton className="w-full h-10 mt-3" />
+            <Skeleton className="w-full h-10 mt-3" />
           </div>
         </div>
-        <div className="mx-52">
-          <Skeleton className="w-full h-10 mt-10" />
+        <div>
+          <Skeleton className="mx-[33rem] h-10 mt-3" />
+          <Skeleton className="mx-[27rem] h-10 mt-3" />
+          <Skeleton className="mx-[27rem] h-10 mt-3" />
         </div>
       </>
     )
@@ -443,10 +445,10 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
             <div className="mb-10">
               <Table>
                 <ScrollArea className="h-[35rem] w-full rounded-md border-2 p-4">
-                  <TableHeader>
-                    <TableRow className="relative">
+                  <TableHeader className="z-10 sticky top-0 bg-MyPurple">
+                    <TableRow>
                       <TableHead>#</TableHead>
-                      <TableHead className="text-left">Exchange</TableHead>
+                      <TableHead className="text-left font-bold text-lg">Exchange</TableHead>
                       <TableHead>Pair</TableHead>
                       <TableHead>Price</TableHead>
                       <TableHead>24h Volume</TableHead>
@@ -454,7 +456,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                     </TableRow>
                   </TableHeader>
                   {data.tickers.map((ticker, index) => (
-                    <TableBody key={index}>
+                    <TableBody key={index} className="-z-10">
                       <TableRow>
                         <TableHead>{index + 1}</TableHead>
                         <TableHead className="font-bold text-lg">{ticker.market.name}</TableHead>

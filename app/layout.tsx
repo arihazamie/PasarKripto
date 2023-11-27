@@ -3,7 +3,7 @@ import { Gabarito } from 'next/font/google'
 import './globals.css'
 import Link from 'next/link'
 import { ThemeProvider } from '@/components/ui/theme-provider'
-import { ModeToggle } from '@/components/ui/darkmode'
+import { DarkMode } from '@/components/ui/darkmode'
 import NavigationBar from '@/components/readyToUse/Navbar/navbar'
 const gabarito = Gabarito({ subsets: ['latin'] })
 
@@ -85,15 +85,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                   PasarKripto
                 </div>
               </Link>
-              <div className="hidden lg:block">
+              <div>
                 <NavigationBar />
               </div>
-              {/* <Input /> */}
+              <Input />
               <div className="md:hidden">
                 <MobileNav />
               </div>
               <div className="hidden md:block">
-                <ModeToggle />
+                <DarkMode />
               </div>
             </div>
             <NavbarAPI />

@@ -73,7 +73,7 @@ const NavbarAPI: React.FC = () => {
   }
 
   return (
-    <div className='w-full -z-20 border-b-2 text-sm hidden'>
+    <div className='w-full border-b-2 text-sm'>
       {data && (
         <div className={'flex md:gap-20 gap-32 text-center items-center justify-center shadow-sm md:mx-10 mx-0'}>
           <Link href={"/ranking"} className="transition-all duration-300 hover:text-[#7071E8]">

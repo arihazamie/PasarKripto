@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/ui/darkmode"
+import { DarkMode } from "@/components/ui/darkmode"
 import Link from "next/link"
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -27,12 +27,12 @@ const Page = () => {
                 <SheetTrigger>
                     <GiHamburgerMenu> </GiHamburgerMenu>
                 </SheetTrigger>
-                <SheetContent className="">
+                <SheetContent>
                     <div className="flex relative">
                         <div className="flex justify-end">
-                            <ModeToggle />
+                            <DarkMode />
                         </div>
-                        <div className="">
+                        <div>
                             <Accordion type="multiple">
                                 <AccordionItem value="item-1">
                                     <AccordionTrigger>Get Started</AccordionTrigger>
