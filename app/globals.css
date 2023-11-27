@@ -72,6 +72,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Gabarito', sans-serif;
   }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;700;800;900&display=swap');

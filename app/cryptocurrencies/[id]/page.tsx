@@ -1,22 +1,24 @@
 'use client'
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Hovers from "@/components/readyToUse/HoverAlert/ranking";
+import axios from "axios"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import Hovers from "@/components/readyToUse/HoverAlert/ranking"
+import { Skeleton } from "@/components/ui/skeleton"
+import { FaCircle } from "react-icons/fa";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 import { BsGlobe2 } from "react-icons/bs"
 import { FaReddit, FaGithub } from "react-icons/fa"
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6"
 
 
 import {
@@ -29,13 +31,13 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button";
-import { MdOutlineOpenInNew } from "react-icons/md";
+import { Button } from "@/components/ui/button"
+import { MdOutlineOpenInNew } from "react-icons/md"
 
 interface PageProps {
   params: {
-    id: string;
-  };
+    id: string
+  }
 }
 
 interface PageData {
@@ -49,12 +51,24 @@ interface PageData {
     current_price: {
       usd: number
     }
-    ath: number
-    ath_change_percentage: number
-    ath_date: string
-    atl: number
-    atl_change_percentage: number
-    atl_date: string
+    ath: {
+      usd: number
+    }
+    ath_change_percentage: {
+      usd: number
+    }
+    ath_date: {
+      usd: string
+    }
+    atl: {
+      usd: number
+    }
+    atl_change_percentage: {
+      usd: number
+    }
+    atl_date: {
+      usd: string
+    }
     market_cap: {
       usd: number
     }
@@ -78,12 +92,17 @@ interface PageData {
   tickers: {
     base: string
     target: string
+    trust_score: string
     market: {
       name: string
+      identifier: string
     }
     last: number
-    converted_volume: number
-  }
+
+    converted_volume: {
+      usd: number
+    }
+  }[]
   links: {
     twitter_screen_name: string
     subreddit_url: string
@@ -98,23 +117,88 @@ interface PageData {
 
 const Page: React.FC<PageProps> = ({ params: { id } }) => {
 
-  const [data, setData] = useState<PageData | null>(null);
+  const [data, setData] = useState<PageData | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     async function getData() {
-      const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/${id}?localization=true&tickers=true&market_data=true`;
+
+      setIsLoading(true)
+
+      const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/${id}?localization=true&tickers=true&market_data=true`
 
       try {
-        const response = await axios.get<PageData>(url);
-        setData(response.data)
+        setTimeout(async () => {
+          const response = await axios.get<PageData>(url)
+          setData(response.data)
+          setIsLoading(false)
+        }, 200)
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error)
       }
     }
 
-    getData();
-  }, [id ,setData]);
+    getData()
+  }, [])
 
+  const athDate = () => {
+    const date = data?.market_data.ath_date
+    if (date) {
+      return date.usd
+    }
+  }
+  const formattedAthDate = athDate() ? new Date(athDate()!).toLocaleDateString('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }) : ''
+
+  const atlDate = () => {
+    const date = data?.market_data.atl_date;
+    if (date) {
+      return date.usd;
+    }
+  };
+  const formattedAtlDate = atlDate() ? new Date(atlDate()!).toLocaleDateString('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }) : ''
+
+  const dom = data?.market_data
+
+  if (!dom) {
+    return (
+      <>
+        <div className="text-center items-center justify-center flex">
+          <Skeleton className="w-36 h-10 mt-16" />
+        </div>
+        <div className="text-center items-center justify-center flex">
+          <Skeleton className="w-96 h-10 mt-10" />
+        </div>
+        <div className="text-center items-center justify-center flex gap-10">
+          <Skeleton className="w-28 h-10 mt-10" />
+          <Skeleton className="w-28 h-10 mt-10" />
+          <Skeleton className="w-28 h-10 mt-10" />
+        </div>
+        <div className="md:flex block text-left gap-4 mx-52">
+          <div className="w-1/2">
+            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-5" />
+          </div>
+          <div className="w-1/2">
+            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-5" />
+            <Skeleton className="w-full h-10 mt-5" />
+          </div>
+        </div>
+        <div className="mx-52">
+          <Skeleton className="w-full h-10 mt-10" />
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <div className="text-center items-center justify-center flex mt-5 md:mt-10 gap-2">
@@ -194,7 +278,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                 </TableHeader>
               </Table>
             </div>
-            <div className="md:w-1/2 flex">
+            <div className="md:w-1/2 flex"> {/*RIGHT*/}
               <Table>
                 <TableHeader>
                   <TableRow></TableRow>
@@ -235,9 +319,36 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
               </Table>
             </div>
           </div>
+          <div className="my-1">
+            <div className="text-xl font-bold my-2">{data.name} Historical</div>
+            <div className="mx-52">
+              <Table>
+                <TableHeader>
+                  <TableRow></TableRow>
+                  <TableRow>
+                    <TableHead className="text-left">All Time High</TableHead>
+                    <TableHead>{formattedAthDate}</TableHead>
+                    <TableHead className="text-right">
+                      <div className="font-bold">${data.market_data.ath.usd.toLocaleString()}</div>
+                      <div className={data.market_data.ath_change_percentage.usd < 0 ? "text-red-400" : "text-green-400"}>{data.market_data.ath_change_percentage.usd.toFixed(2)}%</div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-left">All Time Low</TableHead>
+                    <TableHead>{formattedAtlDate}</TableHead>
+                    <TableHead className="text-right">
+                      <div className="font-bold">${data.market_data.atl.usd.toLocaleString()}</div>
+                      <div className={data.market_data.atl_change_percentage.usd < 0 ? "text-red-400" : "text-green-400"}>{data.market_data.atl_change_percentage.usd.toFixed(2)}%</div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+              </Table>
+            </div>
+          </div>
           <div className="mt-2">
-            <div className="text-lg">{data.name} Information</div>
-            <div className="flex gap-16 items-center justify-center my-3">
+            <div className="flex gap-16 items-center justify-center my-1">
 
               <Link href={data.links.homepage[0]} className={data.links.homepage[0] === "" || null ? "hidden" : data.links.homepage[0]} target="_blank">
                 <Button variant={"purple"} size={"sm"} className="flex items-center gap-1 rounded-lg">
@@ -278,7 +389,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                             {data.links.blockchain_site
                               .filter((url: string) => url !== "")
                               .map((url: string, index: number) => {
-                                const domainName = new URL(url).hostname;
+                                const domainName = new URL(url).hostname
                                 return (
                                   <li className="row-span-1" key={index}>
                                     <Link href={url} target="_blank" className="underline">
@@ -288,7 +399,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                                       </div>
                                     </Link>
                                   </li>
-                                );
+                                )
                               })}
                           </ul>
                         ) : null}
@@ -306,20 +417,20 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <NavigationMenuContent className="p-3">
                         {Array.isArray(data.categories) ? (
                           <ul className="grid gap-2">
-                            {data.categories
-                              .map((url: string, index: number) => {
-                                return (
-                                  <li className="row-span-1" key={index}>
-                                    <div>
-                                      <div className="bg-MyPurple/50 rounded-md p-1">
-                                        <div>{url}</div>
-                                      </div>
+                            {data.categories.map((category: string, index: number) => {
+                              return (
+                                <li className="row-span-1" key={index}>
+                                  <div>
+                                    <div className="bg-MyPurple/50 rounded-md p-1">
+                                      <div>{category}</div>
                                     </div>
-                                  </li>
-                                );
-                              })}
+                                  </div>
+                                </li>
+                              )
+                            })}
                           </ul>
                         ) : null}
+
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   </NavigationMenuList>
@@ -327,10 +438,42 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
               </div>
             </div>
           </div>
+          <div className="w-full">
+            <div className="font-bold text-2xl my-3">{data.name} Markets</div>
+            <div className="mb-10">
+              <Table>
+                <ScrollArea className="h-[35rem] w-full rounded-md border-2 p-4">
+                  <TableHeader>
+                    <TableRow className="relative">
+                      <TableHead>#</TableHead>
+                      <TableHead className="text-left">Exchange</TableHead>
+                      <TableHead>Pair</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead>24h Volume</TableHead>
+                      <TableHead className="text-center">Trust Score</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  {data.tickers.map((ticker, index) => (
+                    <TableBody key={index}>
+                      <TableRow>
+                        <TableHead>{index + 1}</TableHead>
+                        <TableHead className="font-bold text-lg">{ticker.market.name}</TableHead>
+                        <TableHead>{ticker.base}/{ticker.target}</TableHead>
+                        <TableHead>${ticker.last.toLocaleString()}</TableHead>
+                        <TableHead>${ticker.converted_volume.usd.toLocaleString()}</TableHead>
+                        <TableHead className={ticker.trust_score === "green" ? "text-green-400 flex text-center items-center justify-center" : "text-red-400 flex text-center items-center justify-center"}><FaCircle /></TableHead>
+                      </TableRow>
+                      <TableRow></TableRow>
+                    </TableBody>
+                  ))}
+                </ScrollArea>
+              </Table>
+            </div>
+          </div>
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
 export default Page

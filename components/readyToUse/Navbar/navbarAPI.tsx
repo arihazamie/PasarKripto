@@ -34,19 +34,19 @@ const abbreviateNumber = (value: number, decimalPlaces: number): string => {
 }
 
 const NavbarAPI: React.FC = () => {
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<GlobalData | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
-      setisLoading(true)
+      setIsLoading(true)
 
       try {
         setTimeout(async () => {
           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/global`)
           const { active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage, total_market_cap, total_volume } = response.data.data
           setData({ active_cryptocurrencies, markets, market_cap_change_percentage_24h_usd, market_cap_percentage, total_market_cap, total_volume })
-          setisLoading(false)
+          setIsLoading(false)
         }, 200)
       } catch (error) {
         console.error('Error fetching data:', error)
