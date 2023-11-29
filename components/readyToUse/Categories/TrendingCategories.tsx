@@ -43,10 +43,8 @@ const TrendingApp: React.FC = () => {
 
   return (
     <>
-      <div className=" text-xl">Top Crypto Categories By Market Cap</div>
-      <div>View the largest cryptocurrency categories based on market capitalization.</div>
+    <div className="text-center text-lg mt-2">Trending Categories</div>
       <Table>
-        <TableCaption>A list of Categories.</TableCaption>
         <TableHeader className="text-left">
           <TableRow>
             <TableHead>Categories</TableHead>

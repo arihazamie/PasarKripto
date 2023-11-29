@@ -59,54 +59,56 @@ const YourComponent: React.FC = () => {
       setCurrentPage((currentPage) => currentPage - 1)
     }
   }
-
+  
   return (
     <div>
-      <div className="text-2xl font-bold text-center my-5">Cryptocurrencies</div>
-      <Table>
-        <ScrollArea className="w-full h-[40rem] border-2 rounded-md">
-          <TableHeader className="top-0 sticky text-base bg-MyPurple text-white">
-            <TableRow>
-              <TableHead>Rank</TableHead>
-              <TableHead className="">Name</TableHead>
-              <TableHead className="">Price</TableHead>
-              <TableHead className="text-right">1h%</TableHead>
-              <TableHead className="text-right">24h%</TableHead>
-              <TableHead className="text-right">7d%</TableHead>
-              <TableHead className="text-right">24h Volume</TableHead>
-              <TableHead>Market Cap</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((coin: CoinData) => (
-              <TableRow key={coin.id}>
-                <TableCell>{coin.market_cap_rank}.</TableCell>
-                <TableCell>
-                  <Link href={`cryptocurrencies/${coin.id}`}>
-                    <div className="flex gap-2 py-3">
-                      <Image src={coin.image} width={24} height={24} alt={coin.name + 'Image'}></Image>
-                      <span className="font-bold text-base">{coin.name}</span>
-                      <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
-                    </div>
-                  </Link>
-                </TableCell>
-                <TableCell>${`${coin.current_price <= 0.0001 ? coin.current_price : coin.current_price.toLocaleString()}`}</TableCell>
-                <TableCell className={coin.price_change_percentage_1h_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
-                  {coin.price_change_percentage_1h_in_currency !== null ? coin.price_change_percentage_1h_in_currency.toFixed(2) : ''} %
-                </TableCell>
-                <TableCell className={coin.price_change_percentage_24h_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
-                  {coin.price_change_percentage_24h_in_currency !== null ? coin.price_change_percentage_24h_in_currency.toFixed(2) : ''} %
-                </TableCell>
-                <TableCell className={coin.price_change_percentage_7d_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
-                  {coin.price_change_percentage_7d_in_currency !== null ? coin.price_change_percentage_7d_in_currency.toFixed(2) : ''} %
-                </TableCell>
-                <TableCell className="text-right">${coin.total_volume.toLocaleString()}</TableCell>
-                <TableCell>${coin.market_cap.toLocaleString()}</TableCell>
+      <div>
+        <div className="text-2xl font-bold text-center my-5">Cryptocurrencies</div>
+        <Table className="bg-MyPurple/5">
+          <ScrollArea className="w-full h-[40rem] border-2 rounded-md">
+            <TableHeader className="top-0 sticky text-base bg-MyPurple text-white">
+              <TableRow>
+                <TableHead>Rank</TableHead>
+                <TableHead className="">Name</TableHead>
+                <TableHead className="">Price</TableHead>
+                <TableHead className="text-right">1h%</TableHead>
+                <TableHead className="text-right">24h%</TableHead>
+                <TableHead className="text-right">7d%</TableHead>
+                <TableHead className="text-right">24h Volume</TableHead>
+                <TableHead>Market Cap</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </ScrollArea>
-      </Table>
+            </TableHeader>
+            <TableBody>
+              {data.map((coin: CoinData) => (
+                <TableRow key={coin.id}>
+                  <TableCell>{coin.market_cap_rank}.</TableCell>
+                  <TableCell>
+                    <Link href={`cryptocurrencies/${coin.id}`}>
+                      <div className="flex gap-2 py-3">
+                        <Image src={coin.image} width={24} height={24} alt={coin.name + 'Image'}></Image>
+                        <span className="font-bold text-base">{coin.name}</span>
+                        <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
+                      </div>
+                    </Link>
+                  </TableCell>
+                  <TableCell>${`${coin.current_price <= 0.0001 ? coin.current_price : coin.current_price.toLocaleString()}`}</TableCell>
+                  <TableCell className={coin.price_change_percentage_1h_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
+                    {coin.price_change_percentage_1h_in_currency !== null ? coin.price_change_percentage_1h_in_currency.toFixed(2) : ''} %
+                  </TableCell>
+                  <TableCell className={coin.price_change_percentage_24h_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
+                    {coin.price_change_percentage_24h_in_currency !== null ? coin.price_change_percentage_24h_in_currency.toFixed(2) : ''} %
+                  </TableCell>
+                  <TableCell className={coin.price_change_percentage_7d_in_currency <= 0 ? 'text-red-500 text-right' : 'text-green-500 text-right'}>
+                    {coin.price_change_percentage_7d_in_currency !== null ? coin.price_change_percentage_7d_in_currency.toFixed(2) : ''} %
+                  </TableCell>
+                  <TableCell className="text-right">${coin.total_volume.toLocaleString()}</TableCell>
+                  <TableCell>${coin.market_cap.toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </ScrollArea>
+        </Table>
+      </div>
       <div className="mt-5 items-center justify-center text-center">
         <div>
           <Button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</Button>

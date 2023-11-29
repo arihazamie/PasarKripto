@@ -69,14 +69,12 @@ const TrendingApp: React.FC = () => {
 
   return (
     <>
-      <div className=" text-xl">Top-7 trending Coins as Searched by Users in the last 24 hours</div>
+    <div className="text-center text-lg mt-2">Trending Coins</div>
       <Table id="TableRanking">
-        <TableCaption>A list of coins.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Rank</TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Price</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="h-auto">
@@ -88,7 +86,6 @@ const TrendingApp: React.FC = () => {
                 <span className="font-bold text-base">{coin.name}</span>
                 <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
               </div>
-              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>

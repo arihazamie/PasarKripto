@@ -33,7 +33,7 @@ const components: { title: string; link: string; description: string }[] = [
   },
   {
     title: "Explorer",
-    link: "/",
+    link: "/explorer",
     description:
       "let's track your transactions easily.",
   },

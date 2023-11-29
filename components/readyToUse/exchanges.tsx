@@ -74,15 +74,15 @@ const ExchangesApp = () => {
     return (
       <div className='mx-5 text-center items-center justify-center mb-10'>
         <Skeleton className='flex h-10 mx-[33rem] my-5 items-center text-center justify-center' />
-        <div className='w-full h-[32rem] rounded-md border-2 bg-slate-800'>
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
-            <Skeleton className='h-12 w-full bg-slate-600 my-3' />
+        <div className='w-full h-[32rem] rounded-md border-2 bg-slate-200'>
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
+            <Skeleton className='h-12 w-full my-3' />
         </div>
       </div>
     );
@@ -101,7 +101,7 @@ const ExchangesApp = () => {
   return (
     <div className='mx-5'>
       <div className='text-2xl font-bold text-center my-5'>Exchanges</div>
-      <Table className="w-full h-auto">
+      <Table className="w-full h-auto bg-MyPurple/5">
         <ScrollArea className='w-full h-[32rem] rounded-md border-2'>
           <TableHeader className='sticky top-0 bg-MyPurple text-white'>
             <TableRow>

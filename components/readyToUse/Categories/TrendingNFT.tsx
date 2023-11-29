@@ -61,10 +61,9 @@ const NFTApp: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <div className="text-xl">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
-      <Table>
-        <TableCaption>A list of NFTs.</TableCaption>
+    <div className="border-2 rounded-lg mb-5">
+      <div className="text-lg text-center mt-2">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
+      <Table className="my-2">
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -86,7 +85,7 @@ const NFTApp: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   )
 }
 
