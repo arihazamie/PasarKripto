@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: 'https://pasarkripto.vercel.app/explorer',
-            lastModified: new Date(),
+        lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 1,
         },
