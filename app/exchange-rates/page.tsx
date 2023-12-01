@@ -1,6 +1,10 @@
+import Rates from "@/components/readyToUse/exchanges-rates/Rates"
+
 const ExchangeRateApp = () => {
     return (
-        <div></div>
+        <div>
+            <Rates />
+        </div>
     )
 }
 

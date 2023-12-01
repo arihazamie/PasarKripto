@@ -1,7 +1,7 @@
 import TrendingNFTApps from "@/components/readyToUse/Categories/TrendingNFT"
 import Trending from "@/components/readyToUse/Categories/Trending"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
+import { NextSeo } from 'next-seo';
 const TrendingApp = () => {
 
   return (

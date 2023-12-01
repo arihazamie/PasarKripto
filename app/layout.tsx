@@ -16,7 +16,7 @@ import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'PasarKripto',
-  description: 'PasarKripto, Crypto, MarketCrypto',
+  description: 'PasarKripto is a Cryptocurrency tracking',
   publisher: 'Ari Hazamie',
   applicationName: 'PasarKripto',
   keywords: ['PasarKripto', 'Crypto', 'MarketCrypto'],
@@ -24,29 +24,20 @@ export const metadata: Metadata = {
   creator: 'Ari Hazamie',
   openGraph: {
     title: 'PasarKripto',
-    description: 'PasarKripto, Crypto, MarketCrypto',
-    url: 'https://pasarkripto.vercel.app/',
+    description: 'PasarKripto is a Cryptocurrency tracking',
     siteName: 'PasarKripto',
     countryName: 'Indonesia',
+    locale: 'en-US',
+    type: 'website',
     images: [
       {
-        url: 'https://pasarkripto.vercel.app/favicon.ico',
-        width: 1920,
-        height: 1080
-      }
+        url: '/icon.jpg', // Replace with the actual image path
+        width: 800,
+        height: 600,
+        alt: 'PasarKripto Image',
+      },
     ],
-    locale: 'en-US',
-    type: 'website'
   },
-  metadataBase: new URL('https://pasarkripto.vercel.app/'),
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-    date: false,
-    url: true
-  },
-  category: 'Crypto',
   robots: {
     index: true,
     follow: true,
@@ -54,22 +45,22 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: true
-    }
+      noimageindex: true,
+    },
   },
   icons: {
     shortcut: './favicon.ico',
-    icon: './favicon.ico'
-
+    icon: './favicon.ico',
   },
   alternates: {
     canonical: 'https://pasarkripto.vercel.app/',
     languages: {
       'en-US': 'https://pasarkripto.vercel.app/',
       'id-ID': 'https://pasarkripto.vercel.app/',
-    }
-  }
-}
+    },
+  },
+};
+
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 

@@ -27,6 +27,7 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.292.0",
     "next": "14.0.1",
+    "next-seo": "^6.4.0",
     "next-themes": "^0.2.1",
     "node-fetch": "^3.3.2",
     "react": "^18",

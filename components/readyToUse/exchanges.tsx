@@ -43,7 +43,7 @@ const ExchangesApp = () => {
   useEffect(() => {
     const fetchBitcoinData = async () => {
       try {
-        const response = await axios.get<Exchange>('https://api.coingecko.com/api/v3/coins/bitcoin');
+        const response = await axios.get<Exchange>(`${process.env.NEXT_PUBLIC_API_BASE_URL}coins/bitcoin`);
         setBitcoinData(response.data);
       } catch (error) {
         console.error('Error fetching Bitcoin data:', error);

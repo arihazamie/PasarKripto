@@ -202,7 +202,7 @@ const page = () => {
                     <div key={item.id}>
                         <div className=''>
                             <Link href={item.url} className="mx-6 flex justify-center border-2 p-2 rounded-lg hover:border-MyPurple/80 gap-1" target='_blank'>
-                                <Image src={item.image} width={32} height={32} alt={item.name}></Image>
+                                <Image src={item.image} width={32} height={32} alt={item.name} priority></Image>
                                 <div className='text-lg font-bold'>{item.name}</div>
                                 <div className='text-xs'>{item.id}</div>
                             </Link>
