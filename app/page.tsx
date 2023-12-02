@@ -9,9 +9,9 @@ const HomeAPP = () => {
         <br />
         For now not compatible for mobile
         <br />
-        Thanks :{" "}
+        Thanks :
         <Link
-          href={"https://github.com/AriHazamie"}
+          href="https://www.linkedin.com/in/arihazamie/"
           className="underline hover:text-MyPurple"
           target="_blank">
           AriHazamie

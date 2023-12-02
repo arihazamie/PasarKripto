@@ -1,7 +1,7 @@
-"use client"
-import "@/app/globals.css"
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+"use client";
+import "@/app/globals.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 
 import {
@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 // Define an interface for the data
 interface Item {
@@ -40,7 +40,6 @@ const TrendingApp: React.FC = () => {
 
   useEffect(() => {
     async function fetchCoinData() {
-
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/search/trending`;
 
       try {
@@ -57,19 +56,16 @@ const TrendingApp: React.FC = () => {
         }));
         setData(coinData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
-
-
-
 
     fetchCoinData();
   }, []);
 
   return (
     <>
-    <div className="text-center text-lg mt-2">Trending Coins</div>
+      <div className="text-center text-lg mt-2">Trending Coins</div>
       <Table id="TableRanking">
         <TableHeader>
           <TableRow>
@@ -82,16 +78,23 @@ const TrendingApp: React.FC = () => {
             <TableRow key={coin.id}>
               <TableCell className="text-left">{coin.rank}.</TableCell>
               <div className="flex gap-2 py-3">
-                <Image src={coin.image} width={24} height={24} alt={coin.name}></Image>
+                <Image
+                  src={coin.image}
+                  width={24}
+                  height={24}
+                  alt={coin.name}
+                  priority></Image>
                 <span className="font-bold text-base">{coin.name}</span>
-                <span className="text-gray-400 text-xs mt-1">{coin.symbol.toUpperCase()}</span>
+                <span className="text-gray-400 text-xs mt-1">
+                  {coin.symbol.toUpperCase()}
+                </span>
               </div>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </>
-  )
-}
+  );
+};
 
-export default TrendingApp
+export default TrendingApp;

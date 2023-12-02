@@ -1,11 +1,11 @@
-import ExchangesApps from "@/components/readyToUse/exchanges"
+import ExchangesApps from "@/components/readyToUse/exchanges";
 
 const ExchangeApp = () => {
-    return (
-        <>
-            <ExchangesApps/>
-        </>
-    )
-}
+  return (
+    <>
+      <ExchangesApps />
+    </>
+  );
+};
 
-export default ExchangeApp
+export default ExchangeApp;
