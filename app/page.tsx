@@ -1,17 +1,13 @@
-import React from "react";
 import Link from "next/link";
-
 const HomeAPP = () => {
   return (
     <>
-      <div className="alert bg-red-500 text-white text-center p-4 block lg:hidden">
-        Please open with Desktop versions
+      <div className="alert bg-red-700 text-white text-center p-4 block lg:hidden">
+        maybe mobile version has many <b>bugs</b>
         <br />
-        For now not compatible for mobile
-        <br />
-        Thanks :
+        please report {"> "}
         <Link
-          href="https://www.linkedin.com/in/arihazamie/"
+          href="mailto:arihzmii.work@gmail.com"
           className="underline hover:text-MyPurple"
           target="_blank">
           AriHazamie
