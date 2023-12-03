@@ -34,7 +34,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <ThemeProvider
             attribute="class"
             defaultTheme="dark">
-            <div className="flex justify-center items-center md:gap-12 gap-7 py-4">
+            <div className="flex justify-center items-center md:gap-12 gap-28 py-4">
               <Link
                 href={"/"}
                 className="flex items-center gap-2">
@@ -59,7 +59,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 <DarkMode />
               </div>
             </div>
-            <NavbarAPI />
+            <div className="hidden md:block">
+              <NavbarAPI />
+            </div>
             {children}
           </ThemeProvider>
         </div>

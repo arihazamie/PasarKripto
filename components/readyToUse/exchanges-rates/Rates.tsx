@@ -61,7 +61,7 @@ const Rates = () => {
               <TableCaption className="my-5">
                 All list of exchange rates
               </TableCaption>
-              <ScrollArea className="w-full border-2 rounded-lg h-[28rem]">
+              <ScrollArea className="w-full border-2 rounded-lg md:h-[28rem] h-[35rem]">
                 <TableHeader className="sticky top-[-0.2rem] text-lg bg-slate-800">
                   <TableRow>
                     <TableHead>Type</TableHead>
@@ -75,13 +75,17 @@ const Rates = () => {
                       key={key}
                       className="bg-MyPurple/5">
                       <TableRow>
-                        <TableCell>{data.type.toLocaleUpperCase()}</TableCell>
-                        <TableCell className="text-lg font-bold">
+                        <TableCell className="md:text-lg text-sm">
+                          {data.type.toLocaleUpperCase()}
+                        </TableCell>
+                        <TableCell className="md:text-lg md:font-bold text-sm">
                           {data.name}
                         </TableCell>
                         <TableCell>
                           {data.value.toLocaleString()}
-                          <span className="font-bold"> {data.unit}</span>
+                          <span className="md:font-bold text-sm">
+                            {data.unit}
+                          </span>
                         </TableCell>
                       </TableRow>
                     </TableBody>

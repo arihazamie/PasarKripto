@@ -74,16 +74,6 @@ const ExchangesApp = () => {
     return (
       <div className="mx-5 text-center items-center justify-center mb-10">
         <Skeleton className="flex h-10 mx-[33rem] my-5 items-center text-center justify-center" />
-        <div className="w-full h-[32rem] rounded-md border-2 bg-slate-800">
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-          <Skeleton className="h-12 w-full my-3 bg-slate-700" />
-        </div>
       </div>
     );
   }
@@ -125,12 +115,13 @@ const ExchangesApp = () => {
                         ? balancer
                         : exchange.image
                     }
-                    width={50}
-                    height={50}
+                    width={64}
+                    height={64}
                     alt={exchange.name}
                     priority
+                    className="md:w-11 md:h-11 w-11 h-11 mt-2"
                   />
-                  <TableCell className="font-bold text-base">
+                  <TableCell className="md:font-bold md:text-base text-xs">
                     {exchange.name}
                   </TableCell>
                 </Link>

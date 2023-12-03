@@ -58,13 +58,13 @@ const Page = () => {
                       <Link href={"/exchange-rates"}>Exchange Rates</Link>
                     </AccordionContent>
                     <AccordionContent className="text-base text-center hover:underline">
-                      <Link href={"/explorer"}>explorer</Link>
+                      <Link href={"/explorer"}>Explorer</Link>
                     </AccordionContent>
                     <AccordionContent className="text-base text-center hover:underline">
-                      <Link href={"/dominance"}>dominance</Link>
+                      <Link href={"/dominance"}>Dominance</Link>
                     </AccordionContent>
                     <AccordionContent className="text-base text-center hover:underline">
-                      <Link href={"/legal-tender"}>legal-tender</Link>
+                      <Link href={"/academy"}>Learn</Link>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>

@@ -1,11 +1,10 @@
-import Ranking from "@/components/readyToUse/Cryptocurrencies/Ranking"
-
+import Ranking from "@/components/readyToUse/Cryptocurrencies/Ranking";
 const RankingApp = () => {
-    return (
-        <div>
-            <Ranking/>
-        </div>
-    )
-}
+  return (
+    <div className="mx-5">
+      <Ranking />
+    </div>
+  );
+};
 
-export default RankingApp
+export default RankingApp;
