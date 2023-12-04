@@ -13,6 +13,10 @@ const HomeAPP = () => {
           AriHazamie
         </Link>
       </div>
+      <div className="text-center text-5xl font-bold mt-32">
+        <div className="text-MyPurple/80">PasarKripto</div>
+        <div className="text-slate-300">Easily and Quickly Tracking</div>
+      </div>
     </>
   );
 };
