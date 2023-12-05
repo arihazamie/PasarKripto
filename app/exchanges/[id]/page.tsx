@@ -4,14 +4,32 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "@/components/ui/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 //LOGOs
 import { FaReddit, FaFacebook } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaSquareXTwitter, FaLink, FaCircle } from "react-icons/fa6";
 
 interface PageProps {
   params: {
     id: string;
+  };
+}
+
+interface Bitcoin {
+  market_data: {
+    current_price: {
+      usd: number;
+    };
   };
 }
 
@@ -20,7 +38,7 @@ interface PageData {
   year_established: number;
   url: string;
   image: string;
-  centralized: any;
+  centralized: boolean;
   trust_score: number;
   trust_score_rank: number;
   trade_volume_24h_btc: number;
@@ -37,6 +55,9 @@ interface PageData {
     target: string;
     volume: number;
     last: number; //LastPrice
+    converted_volume: {
+      usd: number;
+    };
     market: {
       name: string;
       identifier: string;
@@ -47,6 +68,7 @@ interface PageData {
 
 const Page: React.FC<PageProps> = ({ params: { id } }) => {
   const [data, setData] = useState<PageData | null>(null);
+  const [dataBtc, setDataBtc] = useState<Bitcoin | null>(null);
 
   useEffect(() => {
     async function getData() {
@@ -63,16 +85,51 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
     getData();
   }, [id]);
 
+  useEffect(() => {
+    async function getBtc() {
+      const url = "https://api.coingecko.com/api/v3/coins/bitcoin";
+
+      try {
+        const response = await axios.get<Bitcoin>(url);
+        setDataBtc(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    getBtc();
+  }, [id]);
+
+  const Volume24H = Math.floor(
+    (data?.trade_volume_24h_btc || 0) *
+      (dataBtc?.market_data.current_price.usd || 0)
+  ).toLocaleString();
+  const VolumeBTC = Math.floor(
+    data?.trade_volume_24h_btc || 0
+  ).toLocaleString();
+
+  const Twitter = `https://x.com/${data?.twitter_handle}`;
   return (
     <>
       {data && (
         <>
-          <div className="text-center items-center mt-10">
+          <div className="text-center my-10">
+            <Link
+              href={"/exchanges"}
+              className="hover:underline hover:underline-offset-2 hover:text-MyPurple">
+              Exchanges
+            </Link>
+            {" > "} <span className="text-slate-400">{data.name}</span>
+          </div>
+          <div className="text-center item-center mt-10">
             <div className="flex justify-center">
-              <Button variant={"purple"}>{data.trust_score_rank}</Button>
+              <div className="bg-MyPurple/70 py-1 px-2 rounded shadow-2xl">
+                Rank : {data.trust_score_rank}
+                <div>Trust Score : {data.trust_score}</div>
+              </div>
             </div>
             <div className="my-5">
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center text-center items-center gap-5">
                 <Image
                   src={data.image}
                   width={64}
@@ -80,50 +137,121 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                   alt={data.name + "Image"}
                   priority
                 />
-                <div className="my-5 text-xl font-bold">{data.name}</div>
+                <div>
+                  <div className="text-4xl font-bold">{data.name}</div>
+                  <div>
+                    {data.centralized ? "Centralized" : "Decentralized"}{" "}
+                    Exchange
+                  </div>
+                </div>
+                <div className="text-lg">{data.year_established}</div>
               </div>
             </div>
-            <div>{data.year_established}</div>
-            <Button
-              variant={"purple"}
-              className="my-2">
+            <div className="border p-2 mx-[30rem] rounded-md bg-MyPurple/70 shadow-2xl">
+              <div>Trading Volume(24H)</div>
+              <div className="text-3xl font-bold my-2">
+                ${Volume24H.toLocaleString()}
+              </div>
+              <div>{VolumeBTC.toLocaleString()} BTC</div>
+            </div>
+            <div className="my-5 flex justify-center items-center text-center gap-5">
               <Link
                 href={data.url}
+                className={data.url == "" ? "hidden" : data.url}
                 target="_blank">
-                Trade
+                <Button
+                  className="gap-1"
+                  size={"sm"}
+                  variant={"purple"}>
+                  {data.name}
+                  <FaLink />
+                </Button>
               </Link>
-            </Button>
-            <div className="my-3">
-              <Button
-                variant={"purple"}
-                size={"lg"}
-                className="w-24">
-                <Link
-                  href={data.reddit_url}
-                  target="_blank">
-                  <FaReddit />
-                </Link>
-              </Button>
-              <Button
-                variant={"purple"}
-                size={"lg"}
-                className="w-24 mx-5">
-                <Link
-                  href={data.facebook_url}
-                  target="_blank">
-                  <FaFacebook />
-                </Link>
-              </Button>
-              <Button
-                variant={"purple"}
-                size={"lg"}
-                className="w-24">
-                <Link
-                  href={`https://twitter.com/${data.twitter_handle}`}
-                  target="_blank">
+              <Link
+                href={Twitter}
+                target="_blank"
+                className={
+                  data.twitter_handle == "" ? "hidden" : data.twitter_handle
+                }>
+                <Button
+                  className="gap-1"
+                  variant={"purple"}
+                  size={"sm"}>
+                  Twitter
                   <FaSquareXTwitter />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
+              <Link
+                href={data.reddit_url}
+                target="_blank"
+                className={data.reddit_url == "" ? "hidden" : data.reddit_url}>
+                <Button
+                  className="gap-1"
+                  variant={"purple"}
+                  size={"sm"}>
+                  Reddit
+                  <FaReddit />
+                </Button>
+              </Link>
+              <Link
+                href={data.facebook_url}
+                target="_blank"
+                className={
+                  data.facebook_url == "" ? "hidden" : data.facebook_url
+                }>
+                <Button
+                  className="gap-1"
+                  variant={"purple"}
+                  size={"sm"}>
+                  Facebook <FaFacebook />
+                </Button>
+              </Link>
+            </div>
+            <div className="mx-5 mb-5">
+              <Table>
+                <ScrollArea className="h-[35rem] w-full rounded-md border-2">
+                  <TableHeader className="z-10 sticky top-0 bg-MyPurple">
+                    <TableRow>
+                      <TableHead>#</TableHead>
+                      <TableHead className="text-left font-bold text-lg">
+                        Exchange
+                      </TableHead>
+                      <TableHead>Pair</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead>24h Volume</TableHead>
+                      <TableHead className="text-center">Trust Score</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  {data.tickers.map((ticker, index) => (
+                    <TableBody
+                      key={index}
+                      className="-z-10 bg-MyPurple/10">
+                      <TableRow>
+                        <TableHead>{index + 1}</TableHead>
+                        <TableHead className="font-bold text-lg">
+                          {ticker.market.name}
+                        </TableHead>
+                        <TableHead>
+                          {ticker.base}/{ticker.target}
+                        </TableHead>
+                        <TableHead>${ticker.last.toLocaleString()}</TableHead>
+                        <TableHead>
+                          ${ticker.converted_volume.usd.toLocaleString()}
+                        </TableHead>
+                        <TableHead
+                          className={
+                            ticker.trust_score === "green"
+                              ? "text-green-400 flex text-center items-center justify-center"
+                              : "text-red-400 flex text-center items-center justify-center"
+                          }>
+                          <FaCircle />
+                        </TableHead>
+                      </TableRow>
+                      <TableRow></TableRow>
+                    </TableBody>
+                  ))}
+                </ScrollArea>
+              </Table>
             </div>
           </div>
         </>
