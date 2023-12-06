@@ -13,6 +13,12 @@ import { Input } from "@/components/ui/input";
 import MobileNav from "@/components/readyToUse/Navbar/MobileNavbar";
 import Logo from "./icon.png";
 import Image from "next/image";
+import Separator from "@/components/readyToUse/Navbar/Separator";
+
+//Logos
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdOutlineMail } from "react-icons/md";
+import { FaCopyright } from "react-icons/fa6";
 
 export const metadata: Metadata = {
   title: "PasarKripto",
@@ -29,7 +35,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body className={gabarito.className}>
         <div
-          className="z-50"
+          className="z-50 py-5"
           id="Navbar">
           <ThemeProvider
             attribute="class"
@@ -64,6 +70,39 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             {children}
           </ThemeProvider>
+        </div>
+        <div className="bottom-0 left-0 w-full text-center text-slate-300 text-sm mt-10">
+          <Separator />
+          <div className="mt-1">PasarKripto</div>
+          <div className="flex justify-center items-center gap-5 my-3">
+            <div>
+              <Link
+                href={"https://github.com/arihazamie"}
+                target="_blank"
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                <FaGithub />
+              </Link>
+            </div>
+            <div>
+              <Link
+                href={"https://www.linkedin.com/in/arihazamie/"}
+                target="_blank"
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                <FaLinkedin />
+              </Link>
+            </div>
+            <div>
+              <Link
+                href={"mailto:arihzmii@gmail.com"}
+                target="_blank"
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                <MdOutlineMail />
+              </Link>
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-1 mb-1">
+            <FaCopyright /> 2023 PasarKripto. All Rights Reserved.
+          </div>
         </div>
       </body>
     </html>
