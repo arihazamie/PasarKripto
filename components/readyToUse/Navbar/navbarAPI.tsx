@@ -135,7 +135,9 @@ const NavbarAPI: React.FC = () => {
               BTC: {dom.btc.toFixed(1)}%
             </p>
           </Link>
-          <GasTracker />
+          <div className="z-0">
+            <GasTracker />
+          </div>
         </div>
       )}
     </div>
