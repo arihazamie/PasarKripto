@@ -23,10 +23,10 @@ const Page = () => {
     <>
       <Sheet>
         <SheetTrigger>
-          <GiHamburgerMenu> </GiHamburgerMenu>
+          <GiHamburgerMenu alt="Menu Hamburger" />
         </SheetTrigger>
         <SheetContent>
-          <div className="">
+          <div>
             <div className="justify-center">
               <DarkMode />
             </div>

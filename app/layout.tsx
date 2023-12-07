@@ -80,7 +80,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 href={"https://github.com/arihazamie"}
                 target="_blank"
                 className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
-                <FaGithub />
+                <FaGithub alt="Github Image" />
               </Link>
             </div>
             <div>
@@ -88,7 +88,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 href={"https://www.linkedin.com/in/arihazamie/"}
                 target="_blank"
                 className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
-                <FaLinkedin />
+                <FaLinkedin alt="Linkedin Image" />
               </Link>
             </div>
             <div>
@@ -96,7 +96,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 href={"mailto:arihzmii@gmail.com"}
                 target="_blank"
                 className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
-                <MdOutlineMail />
+                <MdOutlineMail alt="Mail Image" />
               </Link>
             </div>
           </div>
