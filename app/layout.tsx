@@ -79,7 +79,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 href={"https://github.com/arihazamie"}
                 target="_blank"
-                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl"
+                aria-label="Github">
                 <FaGithub alt="Github Image" />
               </Link>
             </div>
@@ -87,7 +88,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 href={"https://www.linkedin.com/in/arihazamie/"}
                 target="_blank"
-                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl"
+                aria-label="Linkedin">
                 <FaLinkedin alt="Linkedin Image" />
               </Link>
             </div>
@@ -95,7 +97,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 href={"mailto:arihzmii@gmail.com"}
                 target="_blank"
-                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl">
+                className="flex justify-center items-center gap-1 hover:text-MyPurple text-xl"
+                aria-label="Mail">
                 <MdOutlineMail alt="Mail Image" />
               </Link>
             </div>

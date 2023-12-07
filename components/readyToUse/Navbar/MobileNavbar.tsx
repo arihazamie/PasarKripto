@@ -26,7 +26,7 @@ const Page = () => {
           <GiHamburgerMenu alt="Menu Hamburger" />
         </SheetTrigger>
         <SheetContent>
-          <div>
+          <divww>
             <div className="justify-center">
               <DarkMode />
             </div>
