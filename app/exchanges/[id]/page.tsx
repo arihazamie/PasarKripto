@@ -136,6 +136,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                   height={64}
                   alt={data.name + "Image"}
                   priority
+                  className="rounded-full"
                 />
                 <div>
                   <div className="text-4xl font-bold">{data.name}</div>
@@ -147,14 +148,14 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                 <div className="text-lg">{data.year_established}</div>
               </div>
             </div>
-            <div className="border p-2 mx-[30rem] rounded-md bg-MyPurple/70 shadow-2xl">
+            <div className="border p-2 md:mx-[30rem] mx-14 rounded-md bg-MyPurple/70 shadow-2xl">
               <div>Trading Volume(24H)</div>
               <div className="text-3xl font-bold my-2">
                 ${Volume24H.toLocaleString()}
               </div>
               <div>{VolumeBTC.toLocaleString()} BTC</div>
             </div>
-            <div className="my-5 flex justify-center items-center text-center gap-5">
+            <div className="my-5 flex justify-center items-center text-center md:gap-5 gap-1">
               <Link
                 href={data.url}
                 className={data.url == "" ? "hidden" : data.url}
@@ -210,12 +211,10 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
             <div className="mx-5 mb-5">
               <Table>
                 <ScrollArea className="h-[35rem] w-full rounded-md border-2">
-                  <TableHeader className="z-10 sticky top-0 bg-MyPurple">
+                  <TableHeader className="z-10 sticky top-0 bg-MyPurple rounded-md">
                     <TableRow>
                       <TableHead>#</TableHead>
-                      <TableHead className="text-left font-bold text-lg">
-                        Exchange
-                      </TableHead>
+                      <TableHead className="text-lg">Exchange</TableHead>
                       <TableHead>Pair</TableHead>
                       <TableHead>Price</TableHead>
                       <TableHead>24h Volume</TableHead>
@@ -228,7 +227,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       className="-z-10 bg-MyPurple/10">
                       <TableRow>
                         <TableHead>{index + 1}</TableHead>
-                        <TableHead className="font-bold text-lg">
+                        <TableHead className="font-bold">
                           {ticker.market.name}
                         </TableHead>
                         <TableHead>

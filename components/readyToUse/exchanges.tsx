@@ -24,6 +24,9 @@ export interface Exchange {
   image: string;
   trust_score: number;
   trade_volume_24h_btc: number;
+}
+
+interface CoinData {
   market_data: {
     current_price: {
       usd: number;
@@ -34,22 +37,22 @@ export interface Exchange {
 const ExchangesApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exchangeData, setExchangeData] = useState<Exchange[]>([]);
-  const [bitcoinData, setBitcoinData] = useState<Exchange | null>(null);
+  const [coinData, setCoinData] = useState<CoinData>({} as CoinData);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBitcoinData = async () => {
-      try {
-        const response = await axios.get<Exchange>(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}coins/bitcoin`
-        );
-        setBitcoinData(response.data);
-      } catch (error) {
-        console.error("Error fetching Bitcoin data:", error);
-      }
-    };
+    const apiUrl = "https://api.coingecko.com/api/v3/coins/bitcoin";
 
-    fetchBitcoinData();
+    setIsLoading(true);
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setCoinData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -96,9 +99,11 @@ const ExchangesApp = () => {
           <TableHeader className="sticky top-0 bg-MyPurple text-white">
             <TableRow>
               <TableHead>Rank</TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead className="md:px-0 px-10">Name</TableHead>
               <TableHead className="text-center">Trust Score</TableHead>
-              <TableHead>Volume 24h</TableHead>
+              <TableHead className="md:px-0 px-10 flex gap-2 text-center justify-center items-center">
+                <div>Volume</div> <div>24h</div>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -119,7 +124,7 @@ const ExchangesApp = () => {
                     height={64}
                     alt={exchange.name}
                     priority
-                    className="md:w-11 md:h-11 w-11 h-11 mt-2"
+                    className="md:w-11 md:h-11 w-11 h-11 mt-2 rounded-full"
                   />
                   <TableCell className="md:font-bold md:text-base text-xs">
                     {exchange.name}
@@ -128,16 +133,8 @@ const ExchangesApp = () => {
                 <TableCell className="text-center">
                   {exchange.trust_score ?? "null"}
                 </TableCell>
-                <TableCell className="text-green-500">
-                  {(
-                    exchange.trade_volume_24h_btc *
-                    (bitcoinData
-                      ? bitcoinData.market_data.current_price.usd
-                      : 1)
-                  ).toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
+                <TableCell className="text-green-500 text-center">
+                  {exchange.trade_volume_24h_btc.toFixed()} BTC
                 </TableCell>
               </TableRow>
             ))}

@@ -62,7 +62,7 @@ const Rates = () => {
                 All list of exchange rates
               </TableCaption>
               <ScrollArea className="w-full border-2 rounded-lg md:h-[28rem] h-[35rem]">
-                <TableHeader className="sticky top-[-0.2rem] text-lg bg-slate-800">
+                <TableHeader className="sticky top-[-0.2rem] text-lg bg-MyPurple">
                   <TableRow>
                     <TableHead>Type</TableHead>
                     <TableHead>Name</TableHead>
@@ -73,7 +73,7 @@ const Rates = () => {
                   Object.entries(rateData.rates).map(([key, data]) => (
                     <TableBody
                       key={key}
-                      className="bg-MyPurple/5">
+                      className="bg-MyPurple/10">
                       <TableRow>
                         <TableCell className="md:text-lg text-sm">
                           {data.type.toLocaleUpperCase()}
