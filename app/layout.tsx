@@ -57,7 +57,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="hidden md:block">
                 <NavigationBar />
               </div>
-              {/* <Input /> */}
               <div className="md:hidden">
                 <MobileNav />
               </div>
@@ -71,7 +70,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             {children}
           </ThemeProvider>
         </div>
-        <div className="bottom-0 left-0 w-full text-center text-slate-300 text-sm mt-10">
+        <div className="bottom-0 left-0 w-full text-center text-slate-300 text-sm mt-10 hidden md:block">
           <Separator />
           <div className="mt-1">PasarKripto</div>
           <div className="flex justify-center items-center gap-5 my-3">

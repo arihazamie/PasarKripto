@@ -25,24 +25,14 @@ const components: { title: string; link: string; description: string }[] = [
       "prescheduled event where the reward for mining and verifying new blocks is reduced by 50%.",
   },
   {
-    title: "Exchange Rates",
-    link: "/exchange-rates",
-    description: "Bitcoin rate converted to Fiat Currency.",
-  },
-  {
     title: "Explorer",
     link: "/explorer",
-    description: "let's track your transactions easily.",
+    description: "let's track your transactions, favorite coins & more easily.",
   },
   {
     title: "Dominance",
     link: "/dominance",
     description: "Strength compared to other cryptocurrencies.",
-  },
-  {
-    title: "Exchange",
-    link: "/exchanges",
-    description: "globally listed exchanges.",
   },
   {
     title: "Learn",
@@ -67,7 +57,7 @@ export default function NavigationBar() {
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-tr from-muted/50 to-muted-foreground p-6 no-underline outline-none focus:shadow-md"
                     href="/">
                     <div className="mb-2 mt-4 text-lg font-medium">
                       PasarKripto

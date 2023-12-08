@@ -1,7 +1,7 @@
-"use client"
-import "@/app/globals.css"
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+"use client";
+import "@/app/globals.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 
 import {
@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 interface NFTData {
   id: string;
@@ -48,12 +48,13 @@ const NFTApp: React.FC = () => {
           nft_contract_id: nft.nft_contract_id,
           native_currency_symbol: nft.native_currency_symbol,
           floor_price_in_native_currency: nft.floor_price_in_native_currency,
-          floor_price_24h_percentage_change: nft.floor_price_24h_percentage_change,
+          floor_price_24h_percentage_change:
+            nft.floor_price_24h_percentage_change,
         }));
 
         setData(nftData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -62,7 +63,10 @@ const NFTApp: React.FC = () => {
 
   return (
     <div className="border-2 rounded-lg mb-5">
-      <div className="text-lg text-center mt-2">Top-5 trending NFTs based on the highest Trading Volume in the last 24 hours</div>
+      <div className="text-lg text-center mt-2">
+        Top-5 trending NFTs based on the highest Trading Volume in the last 24
+        hours
+      </div>
       <Table className="my-2">
         <TableHeader>
           <TableRow>
@@ -75,18 +79,38 @@ const NFTApp: React.FC = () => {
           {data.map((nft: NFTData) => (
             <TableRow key={nft.id}>
               <div className="flex m-0 p-0">
-                <Image src={nft.thumb} width={52} height={0} alt={nft.name}></Image>
-                <TableCell className="font-bold text-base text-left">{nft.name}</TableCell>
+                <Image
+                  src={
+                    nft.thumb == "missing_small.png"
+                      ? "/missing.png"
+                      : nft.thumb
+                  }
+                  width={52}
+                  height={0}
+                  alt={nft.name}
+                />
+                <TableCell className="font-bold text-base text-left">
+                  {nft.name}
+                </TableCell>
                 <TableCell className="text-gray-400">{nft.symbol}</TableCell>
               </div>
-              <TableCell className="text-left">{nft.floor_price_in_native_currency.toFixed(3)} ETH</TableCell>
-              <TableCell className={nft.floor_price_24h_percentage_change < 0 ? 'text-red-500 text-left' : 'text-green-500 text-left'}>{nft.floor_price_24h_percentage_change.toFixed(1)} %</TableCell>
+              <TableCell className="text-left">
+                {nft.floor_price_in_native_currency.toFixed(3)} ETH
+              </TableCell>
+              <TableCell
+                className={
+                  nft.floor_price_24h_percentage_change < 0
+                    ? "text-red-500 text-left"
+                    : "text-green-500 text-left"
+                }>
+                {nft.floor_price_24h_percentage_change.toFixed(1)} %
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
-export default NFTApp
+export default NFTApp;
