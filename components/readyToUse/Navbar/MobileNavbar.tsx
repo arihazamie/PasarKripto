@@ -111,7 +111,7 @@ const MobileNav = () => {
                       </Link>
                       <Link
                         onClick={() => setIsOpen(false)}
-                        href="/learn"
+                        href="/academy"
                         className={HoverText}>
                         Learn
                       </Link>
