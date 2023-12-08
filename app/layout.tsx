@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { DarkMode } from "@/components/ui/darkmode";
 import NavigationBar from "@/components/readyToUse/Navbar/navbar";
 const gabarito = Gabarito({ subsets: ["latin"] });
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import React from "react";
 import NavbarAPI from "@/components/readyToUse/Navbar/navbarAPI";
@@ -37,6 +38,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div
           className="z-50 py-5"
           id="Navbar">
+          <SpeedInsights />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark">
