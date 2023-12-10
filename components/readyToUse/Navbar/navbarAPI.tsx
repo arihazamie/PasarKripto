@@ -74,72 +74,126 @@ const NavbarAPI: React.FC = () => {
 
   const dom = data?.market_cap_percentage;
 
+  let textEffect = "transition-all duration-300 hover:text-MyPurple";
+
   if (!dom) {
     return (
-      <div className="flex gap-5 items-center text-center justify-center">
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
-        <Skeleton className="w-36 h-10" />
+      <div className="hidden md:block">
+        <div className="flex gap-5 items-center text-center justify-center">
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+          <Skeleton className="w-36 h-10" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full border-b-2 text-sm">
-      {data && (
-        <div
-          className={
-            "flex md:gap-20 gap-32 text-center items-center justify-center shadow-sm md:mx-10 mx-0"
-          }>
-          <Link
-            href={"/cryptocurrencies"}
-            className="transition-all duration-300 hover:text-[#7071E8]">
-            <span className="text-gray-400">Cryptos: </span>
-            {data.active_cryptocurrencies}
-          </Link>
-          <Link
-            href={"/exchanges"}
-            className="transition-all duration-300 hover:text-[#7071E8]">
-            <span className="text-gray-400">Exchanges: </span>
-            {data.markets}
-          </Link>
-          <Link
-            href={"#"}
-            className="transition-all duration-300 hover:text-[#7071E8]">
-            <span className="text-gray-400">Market Cap: </span>
-            <span>${abbreviateNumber(data.total_market_cap.usd, 3)} </span>
-            <span
-              className={
-                data.market_cap_change_percentage_24h_usd < 0
-                  ? "text-red-500"
-                  : "text-green-500"
-              }>
-              {data.market_cap_change_percentage_24h_usd.toFixed(2)}%
-            </span>
-          </Link>
-          <Link
-            href={"#"}
-            className="transition-all duration-300 hover:text-[#7071E8]">
-            <span className="text-gray-400">24h Vol: </span>
-            <span>${abbreviateNumber(data.total_volume.usd, 1)}</span>
-          </Link>
-          <Link
-            href={"/dominance"}
-            className="transition-all duration-300 hover:text-[#7071E8]">
-            <p>
-              <span className="text-gray-400">Dominance: </span>
-              BTC: {dom.btc.toFixed(1)}%
-            </p>
-          </Link>
-          <div className="z-0">
-            <GasTracker />
+    <div>
+      <div className="w-full border-b-2 text-sm hidden md:block">
+        {data && (
+          <div
+            className={
+              "flex md:gap-20 gap-32 text-center items-center justify-center shadow-sm md:mx-10 mx-0"
+            }>
+            <Link
+              href={"/cryptocurrencies"}
+              className={textEffect}>
+              <span className="text-gray-400">Cryptos: </span>
+              {data.active_cryptocurrencies}
+            </Link>
+            <Link
+              href={"/exchanges"}
+              className={textEffect}>
+              <span className="text-gray-400">Exchanges: </span>
+              {data.markets}
+            </Link>
+            <Link
+              href={"#"}
+              className={textEffect}>
+              <span className="text-gray-400">Market Cap: </span>
+              <span>${abbreviateNumber(data.total_market_cap.usd, 3)} </span>
+              <span
+                className={
+                  data.market_cap_change_percentage_24h_usd < 0
+                    ? "text-red-500"
+                    : "text-green-500"
+                }>
+                {data.market_cap_change_percentage_24h_usd.toFixed(2)}%
+              </span>
+            </Link>
+            <Link
+              href={"#"}
+              className={textEffect}>
+              <span className="text-gray-400">24h Vol: </span>
+              <span>${abbreviateNumber(data.total_volume.usd, 1)}</span>
+            </Link>
+            <Link
+              href={"/dominance"}
+              className={textEffect}>
+              <p>
+                <span className="text-gray-400">Dominance: </span>
+                BTC: {dom.btc.toFixed(1)}%
+              </p>
+            </Link>
+            <div className="z-0">
+              <GasTracker />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      <div className="block md:hidden">
+        {data && (
+          <div className="text-center">
+            <div className="flex text-center justify-center items-center gap-5">
+              <div>
+                <Link
+                  href={"/cryptocurrencies"}
+                  className={textEffect}>
+                  <span className="text-gray-400">Cryptos: </span>
+                  {data.active_cryptocurrencies}
+                </Link>
+              </div>
+              <div>
+                <Link
+                  href={"/exchanges"}
+                  className={textEffect}>
+                  <span className="text-gray-400">Exchanges: </span>
+                  {data.markets}
+                </Link>
+              </div>
+              <div>
+                <Link
+                  href={"#"}
+                  className={textEffect}>
+                  <span className="text-gray-400">24h Vol: </span>
+                  <span>${abbreviateNumber(data.total_volume.usd, 1)}</span>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <Link
+                href={"#"}
+                className={textEffect}>
+                <span className="text-gray-400">Market Cap: </span>
+                <span>${abbreviateNumber(data.total_market_cap.usd, 3)} </span>
+                <span
+                  className={
+                    data.market_cap_change_percentage_24h_usd < 0
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }>
+                  {data.market_cap_change_percentage_24h_usd.toFixed(2)}%
+                </span>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

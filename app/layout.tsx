@@ -66,7 +66,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 <DarkMode />
               </div>
             </div>
-            <div className="hidden md:block">
+            <div>
               <NavbarAPI />
             </div>
             {children}

@@ -63,8 +63,8 @@ export default function NavigationBar() {
             Cryptocurrency
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
+            <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <div className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-tr from-muted/50 to-muted-foreground p-6 no-underline outline-none focus:shadow-md"
@@ -78,7 +78,7 @@ export default function NavigationBar() {
                     </p>
                   </Link>
                 </NavigationMenuLink>
-              </li>
+              </div>
               <Link
                 href="/cryptocurrencies"
                 className={HoverText}>
@@ -107,7 +107,7 @@ export default function NavigationBar() {
                   <div className="text-gray-400">Top Trending in 24H</div>
                 </div>
               </Link>
-            </ul>
+            </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
@@ -147,24 +147,22 @@ const ListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
-    <ul>
-      <li>
-        <NavigationMenuLink asChild>
-          <a
-            ref={ref}
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-              className
-            )}
-            {...props}>
-            <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-              {children}
-            </p>
-          </a>
-        </NavigationMenuLink>
-      </li>
-    </ul>
+    <div>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}>
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </div>
   );
 });
 ListItem.displayName = "ListItem";
