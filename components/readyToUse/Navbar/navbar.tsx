@@ -39,6 +39,16 @@ const components: { title: string; link: string; description: string }[] = [
     link: "/academy",
     description: "Learn about Cryptocurrency with PasarKripto Academy.",
   },
+  {
+    title: "Coins Categories",
+    link: "/categories",
+    description: "List all categories with market data",
+  },
+  {
+    title: "NFT",
+    link: "/nfts",
+    description: "List all NFTs",
+  },
 ];
 
 export default function NavigationBar() {
