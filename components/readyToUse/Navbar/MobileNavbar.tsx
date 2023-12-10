@@ -93,6 +93,18 @@ const MobileNav = () => {
                     <div className="flex flex-col gap-y-2 text-muted-foreground">
                       <Link
                         onClick={() => setIsOpen(false)}
+                        href="/nfts"
+                        className={HoverText}>
+                        NFT
+                      </Link>
+                      <Link
+                        onClick={() => setIsOpen(false)}
+                        href="/categories"
+                        className={HoverText}>
+                        Categories
+                      </Link>
+                      <Link
+                        onClick={() => setIsOpen(false)}
                         href="/bitcoin-halving"
                         className={HoverText}>
                         Bitcoin Halving
