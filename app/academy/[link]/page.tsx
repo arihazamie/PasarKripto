@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Component {
   title: string;
@@ -92,6 +95,13 @@ const components: Component[] = [
 
 const Page: React.FC<PageProps> = ({ params: { link } }) => {
   const component = components.find((comp) => comp.link === link);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   if (!component) {
     return (
@@ -102,30 +112,46 @@ const Page: React.FC<PageProps> = ({ params: { link } }) => {
   }
 
   return (
-    <div className="text-center justify-center items-center sm:mx-2">
-      <div className="mt-3">
-        <Link
-          href={"/academy"}
-          className="hover:text-MyPurple hover:underline">
-          academy
-        </Link>{" "}
-        {"> "}
-        <span className="text-slate-500">{component.title}</span>
-      </div>
-      <div className="font-bold text-3xl my-5 text-MyPurple">
-        PasarKripto Academy
-      </div>
-      <div className="border-2 rounded-md bg-MyPurple/10 my-3 md:mx-52 mx-5 p-5">
-        <div className="text-2xl font-bold mb-2">{component.title}</div>
-        <div className="text-justify text-slate-300">{component.content}</div>
-        <div className="mt-3">
-          <Link
-            href={"/academy"}
-            className="bg-MyPurple/70 p-2 rounded-md hover:bg-MyPurple/50">
-            Back
-          </Link>
+    <div>
+      {isLoading ? (
+        <div className="mx-52">
+          <div className="mx-72">
+            <Skeleton className="w-full h-5 my-5" />
+          </div>
+          <div className="mx-64">
+            <Skeleton className="w-full h-10 my-5" />
+          </div>
+          <Skeleton className="w-full h-[20rem]" />
         </div>
-      </div>
+      ) : (
+        <div className="text-center justify-center items-center sm:mx-2">
+          <div className="mt-3">
+            <Link
+              href={"/academy"}
+              className="hover:text-MyPurple hover:underline">
+              academy
+            </Link>{" "}
+            {"> "}
+            <span className="text-slate-500">{component.title}</span>
+          </div>
+          <div className="font-bold text-3xl my-5 text-MyPurple">
+            PasarKripto Academy
+          </div>
+          <div className="border-2 rounded-md bg-MyPurple/10 my-3 md:mx-52 mx-5 p-5">
+            <div className="text-2xl font-bold mb-2">{component.title}</div>
+            <div className="text-justify text-slate-300">
+              {component.content}
+            </div>
+            <div className="mt-3">
+              <Link
+                href={"/academy"}
+                className="bg-MyPurple/70 p-2 rounded-md hover:bg-MyPurple/50">
+                Back
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

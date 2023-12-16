@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Separator } from "@/components/ui/separator";
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const page = () => {
+const Page = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const data = [
     {
       id: "BTC",
@@ -168,34 +171,51 @@ const page = () => {
     },
   ];
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+
   return (
-    <>
-      <div className="text-center my-10 text-2xl font-bold">
-        Crypto Network Explorer
-      </div>
-      <div className="grid md:mx-[15rem] mx-2 gap-2 md:grid-cols-3 grid-cols-2 border-2 md:p-5 p-5 rounded-lg bg-MyPurple/5">
-        {data.map((item) => (
-          <div key={item.id}>
-            <div className="">
-              <Link
-                href={item.url}
-                className="md:mx-6 mx-0 flex justify-center border-2 p-2 rounded-lg hover:border-MyPurple/80 gap-1"
-                target="_blank">
-                <Image
-                  src={item.image}
-                  width={32}
-                  height={32}
-                  alt={item.name}
-                  priority></Image>
-                <div className="md:text-lg md:font-bold">{item.name}</div>
-                <div className="text-xs">{item.id}</div>
-              </Link>
-            </div>
+    <div>
+      {isLoading ? (
+        <div className="mx-56">
+          <div className="mx-64">
+            <Skeleton className="w-full h-10 my-10" />
           </div>
-        ))}
-      </div>
-    </>
+          <Skeleton className="w-full h-[30rem]" />
+        </div>
+      ) : (
+        <div>
+          <div className="text-center my-10 text-2xl font-bold">
+            Crypto Network Explorer
+          </div>
+          <div className="grid md:mx-[15rem] mx-2 gap-2 md:grid-cols-3 grid-cols-2 border-2 md:p-5 p-5 rounded-lg bg-MyPurple/5">
+            {data.map((item) => (
+              <div key={item.id}>
+                <div className="">
+                  <Link
+                    href={item.url}
+                    className="md:mx-6 mx-0 flex justify-center border-2 p-2 rounded-lg hover:border-MyPurple/80 gap-1"
+                    target="_blank">
+                    <Image
+                      src={item.image}
+                      width={32}
+                      height={32}
+                      alt={item.name}
+                      priority></Image>
+                    <div className="md:text-lg md:font-bold">{item.name}</div>
+                    <div className="text-xs">{item.id}</div>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default page;
+export default Page;

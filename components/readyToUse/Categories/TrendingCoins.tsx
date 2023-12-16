@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
 
 // Define an interface for the data
 interface Item {
@@ -22,7 +23,12 @@ interface Item {
   symbol: string;
   market_cap_rank: number;
   thumb: string;
-  score: number;
+  data: {
+    price: string;
+    price_change_percentage_24h: {
+      usd: number;
+    };
+  };
 }
 
 interface CoinData {
@@ -32,7 +38,8 @@ interface CoinData {
   symbol: string;
   rank: number;
   image: string;
-  score: number;
+  price: any; // Add this line
+  percentage24h: any; // Add this line
 }
 
 const TrendingApp: React.FC = () => {
@@ -52,7 +59,9 @@ const TrendingApp: React.FC = () => {
           symbol: coin.item.symbol,
           rank: coin.item.market_cap_rank,
           image: coin.item.thumb,
-          score: coin.item.score + 1,
+          price: coin.item.data.price,
+          percentage24h:
+            coin.item.data.price_change_percentage_24h?.usd?.toFixed(2),
         }));
         setData(coinData);
       } catch (error) {
@@ -71,24 +80,33 @@ const TrendingApp: React.FC = () => {
           <TableRow>
             <TableHead>Rank</TableHead>
             <TableHead>Name</TableHead>
+            <TableHead>24H</TableHead>
+            <TableHead>Price</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="h-auto">
-          {data.map((coin: CoinData) => (
+          {data.slice(0, 7).map((coin: CoinData, index: number) => (
             <TableRow key={coin.id}>
-              <TableCell className="text-left">{coin.rank}.</TableCell>
-              <div className="flex gap-2 py-3">
+              <TableCell className="text-left">{index + 1}.</TableCell>
+              <Link
+                href={`/cryptocurrencies/${coin.id}`}
+                className="flex gap-2 py-3">
                 <Image
                   src={coin.image}
                   width={24}
                   height={24}
                   alt={coin.name}
-                  priority></Image>
+                  priority
+                />
                 <span className="font-bold text-base">{coin.name}</span>
                 <span className="text-gray-400 text-xs mt-1">
                   {coin.symbol.toUpperCase()}
                 </span>
-              </div>
+              </Link>
+              <TableCell className="text-MyPurple">
+                {coin.percentage24h} %
+              </TableCell>
+              <TableCell>{coin.price}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -43,8 +43,6 @@ const ExchangesApp = () => {
   useEffect(() => {
     const apiUrl = "https://api.coingecko.com/api/v3/coins/bitcoin";
 
-    setIsLoading(true);
-
     axios
       .get(apiUrl)
       .then((response) => {
@@ -73,14 +71,6 @@ const ExchangesApp = () => {
       });
   }, [currentPage]);
 
-  if (isLoading) {
-    return (
-      <div className="mx-5 text-center items-center justify-center mb-10">
-        <Skeleton className="flex h-10 mx-[33rem] my-5 items-center text-center justify-center" />
-      </div>
-    );
-  }
-
   const handleNextPage = () => {
     setCurrentPage((currentPage) => currentPage + 1);
   };
@@ -91,71 +81,88 @@ const ExchangesApp = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  });
+
   return (
     <div className="mx-5">
-      <div className="text-2xl font-bold text-center my-5">Exchanges</div>
-      <Table className="w-full h-auto bg-MyPurple/5">
-        <ScrollArea className="w-full h-[32rem] rounded-md border-2">
-          <TableHeader className="sticky top-0 bg-MyPurple text-white">
-            <TableRow>
-              <TableHead>Rank</TableHead>
-              <TableHead className="md:px-0 px-10">Name</TableHead>
-              <TableHead className="text-center">Trust Score</TableHead>
-              <TableHead className="md:px-0 px-10 flex gap-2 text-center justify-center items-center">
-                <div>Volume</div> <div>24h</div>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {exchangeData.map((exchange) => (
-              <TableRow key={exchange.id}>
-                <TableCell>{exchange.trust_score_rank}</TableCell>
-                <Link
-                  href={`/exchanges/${exchange.id}`}
-                  className="flex text-left"
-                  prefetch>
-                  <Image
-                    src={
-                      exchange.image === "missing_small.png"
-                        ? balancer
-                        : exchange.image
-                    }
-                    width={64}
-                    height={64}
-                    alt={exchange.name}
-                    priority
-                    className="md:w-11 md:h-11 w-11 h-11 mt-2 rounded-full"
-                  />
-                  <TableCell className="md:font-bold md:text-base text-xs">
-                    {exchange.name}
-                  </TableCell>
-                </Link>
-                <TableCell className="text-center">
-                  {exchange.trust_score ?? "null"}
-                </TableCell>
-                <TableCell className="text-green-500 text-center">
-                  {exchange.trade_volume_24h_btc.toFixed()} BTC
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </ScrollArea>
-      </Table>
-      <div className="items-center justify-center text-center mt-5">
+      {isLoading ? (
         <div>
-          <Button
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}>
-            Previous
-          </Button>
-          <span>Page {currentPage}</span>
-          <Button
-            onClick={handleNextPage}
-            disabled={currentPage === 7}>
-            Next
-          </Button>
+          <div className="mx-[30rem]">
+            <Skeleton className="w-full h-10 my-5" />
+          </div>
+          <Skeleton className="w-full h-[40rem]" />
         </div>
-      </div>
+      ) : (
+        <div className="">
+          <div className="text-2xl font-bold text-center my-5">Exchanges</div>
+          <Table className="w-full h-auto bg-MyPurple/5">
+            <ScrollArea className="w-full h-[32rem] rounded-md border-2">
+              <TableHeader className="sticky top-0 bg-MyPurple text-white">
+                <TableRow>
+                  <TableHead>Rank</TableHead>
+                  <TableHead className="md:px-0 px-10">Name</TableHead>
+                  <TableHead className="text-center">Trust Score</TableHead>
+                  <TableHead className="md:px-0 px-10 flex gap-2 text-center justify-center items-center">
+                    <div>Volume</div> <div>24h</div>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {exchangeData.map((exchange) => (
+                  <TableRow key={exchange.id}>
+                    <TableCell>{exchange.trust_score_rank}</TableCell>
+                    <Link
+                      href={`/exchanges/${exchange.id}`}
+                      className="flex text-left"
+                      prefetch>
+                      <Image
+                        src={
+                          exchange.image === "missing_small.png"
+                            ? balancer
+                            : exchange.image
+                        }
+                        width={64}
+                        height={64}
+                        alt={exchange.name}
+                        priority
+                        className="md:w-11 md:h-11 w-11 h-11 mt-2 rounded-full"
+                      />
+                      <TableCell className="md:font-bold md:text-base text-xs">
+                        {exchange.name}
+                      </TableCell>
+                    </Link>
+                    <TableCell className="text-center">
+                      {exchange.trust_score ?? "null"}
+                    </TableCell>
+                    <TableCell className="text-green-500 text-center">
+                      {exchange.trade_volume_24h_btc.toFixed()} BTC
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </ScrollArea>
+          </Table>
+          <div className="items-center justify-center text-center mt-5">
+            <div>
+              <Button
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}>
+                Previous
+              </Button>
+              <span>Page {currentPage}</span>
+              <Button
+                onClick={handleNextPage}
+                disabled={currentPage === 7}>
+                Next
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

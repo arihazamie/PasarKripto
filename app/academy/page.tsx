@@ -8,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Component {
   title: string;
@@ -70,39 +72,67 @@ const components: Component[] = [
 ];
 
 const Page: React.FC<PageProps> = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const Footer = "PasarKripto Academy";
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   return (
-    <>
-      <div className="text-3xl text-center my-5 font-bold">
-        Learn with PasarKripto Academy
-      </div>
-      <div className="md:mx-32 mx-10 my-10">
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
-          {components.map((component, index) => (
-            <div key={index}>
-              <Card className="bg-MyPurple/10 shadow-2xl">
-                <CardHeader>
-                  <CardTitle>{component.title}</CardTitle>
-                  <CardDescription>{component.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Card Content</p>
-                </CardContent>
-                <CardFooter className="text-sm">
-                  <div className="text-slate-400">{Footer}</div>
-                  <Link
-                    href={`academy/${component.link}`}
-                    className="font-bold bg-MyPurple/70 p-1 rounded hover:bg-MyPurple/50 ml-12 text-base px-5">
-                    Learn
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-          ))}
+    <div>
+      {isLoading ? (
+        <div className="mx-32">
+          <div>
+            <Skeleton className="w-full h-10 my-5" />
+          </div>
+          <div className="mt-5 grid md:grid-cols-3 grid-cols-1 gap-10">
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+            <Skeleton className="w-[19rem] h-44" />
+          </div>
         </div>
-      </div>
-    </>
+      ) : (
+        <div>
+          <div className="text-3xl text-center my-5 font-bold">
+            Learn with PasarKripto Academy
+          </div>
+          <div className="md:mx-32 mx-10 my-10">
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
+              {components.map((component, index) => (
+                <div key={index}>
+                  <Card className="bg-MyPurple/10 shadow-2xl">
+                    <CardHeader>
+                      <CardTitle>{component.title}</CardTitle>
+                      <CardDescription>{component.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p>Card Content</p>
+                    </CardContent>
+                    <CardFooter className="text-sm">
+                      <div className="text-slate-400">{Footer}</div>
+                      <Link
+                        href={`academy/${component.link}`}
+                        className="font-bold bg-MyPurple/70 p-1 rounded hover:bg-MyPurple/50 ml-12 text-base px-5">
+                        Learn
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

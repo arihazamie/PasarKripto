@@ -7,13 +7,14 @@ import { DarkMode } from "@/components/ui/darkmode";
 import NavigationBar from "@/components/readyToUse/Navbar/navbar";
 const gabarito = Gabarito({ subsets: ["latin"] });
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Bitcoin, Ethereum } from "./Images/Images";
+import Image from "next/image";
 
 import React from "react";
 import NavbarAPI from "@/components/readyToUse/Navbar/navbarAPI";
 import { Input } from "@/components/ui/input";
 import MobileNav from "@/components/readyToUse/Navbar/MobileNavbar";
 import Logo from "./icon.png";
-import Image from "next/image";
 import Separator from "@/components/readyToUse/Navbar/Separator";
 
 //Logos
@@ -51,6 +52,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                   width={50}
                   height={50}
                   alt="PasarKripto Image"
+                  className="hover:animate-spin"
                 />
                 <div className="md:text-3xl text-2xl font-bold transition-all duration-300 hover:text-MyPurple">
                   PasarKripto

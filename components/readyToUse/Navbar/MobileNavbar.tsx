@@ -40,7 +40,7 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <div className="px-2 flex flex-col gap-4">
-            <div className="flex items-center justify-center text-center gap-5">
+            <div className="flex items-center justify-center text-center gap-x-5">
               <div>
                 <Link
                   href="/"
@@ -49,7 +49,7 @@ const MobileNav = () => {
                   PasarKripto
                 </Link>
               </div>
-              <div className="py-5">
+              <div className="">
                 <DarkMode />
               </div>
             </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import Categories from "@/components/readyToUse/CoinCategories/Categories";
 const page = () => {
   return (
