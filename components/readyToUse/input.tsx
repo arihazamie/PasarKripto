@@ -29,15 +29,12 @@ const SearchInput = () => {
     if (search) {
       axios
         .get<Data>(
-          `${process.env.NEXT_PUBLIC_SEARCH}?query=${search}&per_page=10`
+          `https://api.coingecko.com/api/v3/search?query=${search}&per_page=10`
         )
         .then((res) => res.data)
         .then((data) => {
           setData(data);
-        })
-        .catch((error) => {});
-    } else {
-      setData(undefined);
+        });
     }
   }, [search]);
 
