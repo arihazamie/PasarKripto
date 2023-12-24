@@ -79,9 +79,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
       try {
         const response = await axios.get<PageData>(url);
         setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     getData();
@@ -94,9 +92,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
       try {
         const response = await axios.get<Bitcoin>(url);
         setDataBtc(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     getBtc();

@@ -30,11 +30,8 @@ const GasPriceComponent = () => {
           fastGasPrice: FastGasPrice,
         });
       } else {
-        console.error("Failed to fetch gas prices:", data.message);
       }
-    } catch (error) {
-      console.error("Error fetching gas prices:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

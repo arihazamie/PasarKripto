@@ -130,9 +130,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           setData(response.data);
           setIsLoading(false);
         }, 200);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     getData();
@@ -292,8 +290,8 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>Market Cap</div>
                       <div className="pt-[0.3rem]">
                         <Hovers
-                          header={"Market Cap = Harga x Supply Yang Beredar"}
-                          body={`Total nilai pasar semua ${data.name} yang saat ini beredar.`}
+                          header={"Market Cap = Price x Circulating Supply"}
+                          body={`Total market value of all ${data.name} currently in circulation.`}
                         />
                       </div>
                     </TableHead>
@@ -306,7 +304,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>Volume (24h)</div>
                       <div className="pt-[0.3rem]">
                         <Hovers
-                          header={`Ukuran jumlah ${data.name} yang diperdagangkan di semua platform yang dilacak dalam 24 jam terakhir.`}
+                          header={`A measure of the amount of ${data.name} traded across all tracked platforms in the last 24 hours.`}
                           body={""}
                         />
                       </div>
@@ -321,9 +319,9 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>
                         <div className="pt-[0.3rem]">
                           <Hovers
-                            header={`FDV adalah kapitalisasi pasar teoretis ${data.name} dari seluruh pasok beredar, berdasarkan harga pasar saat ini.`}
+                            header={`FDV is the theoretical market capitalization ${data.name} of the entire outstanding supply, based on current market prices.`}
                             body={
-                              "Fully Diluted Valuation (FDV) = Harga x Total Supply"
+                              "Fully Diluted Valuation (FDV) = Price x Total Supply"
                             }
                           />
                         </div>
@@ -349,7 +347,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>
                         <div className="pt-[0.3rem]">
                           <Hovers
-                            header={`Jumlah ${data.name} yang beredar di pasar dan dapat diperdagangkan oleh publik.`}
+                            header={`Number of ${data.name} outstanding in the market and tradable by the public.`}
                             body={""}
                           />
                         </div>
@@ -368,9 +366,9 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>
                         <div className="pt-[0.3rem]">
                           <Hovers
-                            header={`Jumlah koin yang telah dibuat, dikurangi dengan koin yang telah dibakar (dikeluarkan dari peredaran).`}
+                            header={`Number of coins that have been made, minus coins that have been burned (taken out of circulation).`}
                             body={
-                              "Total pasokan = Total koin yang dibuat - koin yang telah dibakar"
+                              "Total supply = Total coins made - coins burned"
                             }
                           />
                         </div>
@@ -389,7 +387,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>
                         <div className="pt-[0.3rem]">
                           <Hovers
-                            header={`Jumlah maksimum ${data.name} yang ditetapkan/dipatenkan`}
+                            header={`Maximum number of ${data.name} assigned/patented`}
                             body={""}
                           />
                         </div>
@@ -408,7 +406,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           </div>
           <div className="my-1">
             <div className="text-xl font-bold my-2">{data.name} Historical</div>
-            <div className="mx-52">
+            <div className="md:mx-52 mx-0">
               <Table>
                 <TableHeader>
                   <TableRow></TableRow>
@@ -453,152 +451,155 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
             </div>
           </div>
           <div className="mt-2">
-            <div className="flex gap-16 items-center justify-center my-1">
-              <Link
-                href={data.links.homepage[0]}
-                className={
-                  data.links.homepage[0] === "" || null
-                    ? "hidden"
-                    : data.links.homepage[0]
-                }
-                target="_blank">
-                <Button
-                  variant={"purple"}
-                  size={"sm"}
-                  className="flex items-center gap-1 rounded-lg">
-                  <BsGlobe2 />
-                  <div>Website</div>
-                </Button>
-              </Link>
+            <div className="my-1">
+              <div className="flex justify-center gap-2">
+                <Link
+                  href={data.links.homepage[0]}
+                  className={
+                    data.links.homepage[0] === "" || null
+                      ? "hidden"
+                      : data.links.homepage[0]
+                  }
+                  target="_blank">
+                  <Button
+                    variant={"purple"}
+                    size={"sm"}
+                    className="flex items-center gap-1 rounded-lg">
+                    <BsGlobe2 />
+                    <div>Website</div>
+                  </Button>
+                </Link>
 
-              <Link
-                href={
-                  data.links.subreddit_url === null || ""
-                    ? "hidden"
-                    : data.links.subreddit_url
-                }
-                className={
-                  data.links.subreddit_url === null || ""
-                    ? "hidden"
-                    : data.links.subreddit_url
-                }
-                target="_blank">
-                <Button
-                  variant={"purple"}
-                  size={"sm"}
-                  className="flex items-center gap-1 rounded-lg">
-                  <FaReddit />
-                  <div>Reddit</div>
-                </Button>
-              </Link>
+                <Link
+                  href={
+                    data.links.subreddit_url === null || ""
+                      ? "hidden"
+                      : data.links.subreddit_url
+                  }
+                  className={
+                    data.links.subreddit_url === null || ""
+                      ? "hidden"
+                      : data.links.subreddit_url
+                  }
+                  target="_blank">
+                  <Button
+                    variant={"purple"}
+                    size={"sm"}
+                    className="flex items-center gap-1 rounded-lg">
+                    <FaReddit />
+                    <div>Reddit</div>
+                  </Button>
+                </Link>
 
-              <Link
-                href={`https://twitter.com/${data.links.twitter_screen_name}`}
-                className={
-                  data.links.twitter_screen_name === null || ""
-                    ? "hidden"
-                    : data.links.twitter_screen_name
-                }
-                target="_blank">
-                <Button
-                  variant={"purple"}
-                  size={"sm"}
-                  className="flex items-center gap-1 rounded-lg">
-                  <FaXTwitter />
-                  <div>Twitter</div>
-                </Button>
-              </Link>
+                <Link
+                  href={`https://twitter.com/${data.links.twitter_screen_name}`}
+                  className={
+                    data.links.twitter_screen_name === null || ""
+                      ? "hidden"
+                      : data.links.twitter_screen_name
+                  }
+                  target="_blank">
+                  <Button
+                    variant={"purple"}
+                    size={"sm"}
+                    className="flex items-center gap-1 rounded-lg">
+                    <FaXTwitter />
+                    <div>Twitter</div>
+                  </Button>
+                </Link>
 
-              <Link
-                href={`${
-                  data.links.repos_url.github[0] === null
-                    ? "NULL"
-                    : data.links.repos_url.github[0]
-                }`}
-                className={`${
-                  data.links.repos_url.github[0] === null || ""
-                    ? "hidden"
-                    : data.links.repos_url.github[0]
-                }`}
-                target="_blank">
-                <Button
-                  variant={"purple"}
-                  size={"sm"}
-                  className="flex items-center gap-1 rounded-lg">
-                  <FaGithub />
-                  <div>Github</div>
-                </Button>
-              </Link>
-
-              <div>
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">
-                        Explorer
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="p-3">
-                        {Array.isArray(data.links.blockchain_site) ? (
-                          <ul className="grid gap-2">
-                            {data.links.blockchain_site
-                              .filter((url: string) => url !== "")
-                              .map((url: string, index: number) => {
-                                const domainName = new URL(url).hostname;
-                                return (
-                                  <li
-                                    className="row-span-1"
-                                    key={index}>
-                                    <Link
-                                      href={url}
-                                      target="_blank"
-                                      className="underline">
-                                      <div className="text-sm flex items-center gap-1 hover:bg-MyPurple/50 p-1 rounded">
-                                        <div>{domainName}</div>
-                                        <MdOutlineOpenInNew />
-                                      </div>
-                                    </Link>
-                                  </li>
-                                );
-                              })}
-                          </ul>
-                        ) : null}
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
+                <Link
+                  href={`${
+                    data.links.repos_url.github[0] === null
+                      ? "NULL"
+                      : data.links.repos_url.github[0]
+                  }`}
+                  className={`${
+                    data.links.repos_url.github[0] === null || ""
+                      ? "hidden"
+                      : data.links.repos_url.github[0]
+                  }`}
+                  target="_blank">
+                  <Button
+                    variant={"purple"}
+                    size={"sm"}
+                    className="flex items-center gap-1 rounded-lg">
+                    <FaGithub />
+                    <div>Github</div>
+                  </Button>
+                </Link>
               </div>
 
-              <div>
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">
-                        Categories
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="p-3">
-                        {Array.isArray(data.categories) ? (
-                          <ul className="grid gap-2">
-                            {data.categories.map(
-                              (category: string, index: number) => {
-                                return (
-                                  <li
-                                    className="row-span-1"
-                                    key={index}>
-                                    <div>
-                                      <div className="bg-MyPurple/50 rounded-md p-1">
-                                        <div>{category}</div>
+              <div className="flex justify-center items-center text-center gap-5">
+                <div>
+                  <NavigationMenu>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">
+                          Explorer
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="p-3">
+                          {Array.isArray(data.links.blockchain_site) ? (
+                            <ul className="grid gap-2">
+                              {data.links.blockchain_site
+                                .filter((url: string) => url !== "")
+                                .map((url: string, index: number) => {
+                                  const domainName = new URL(url).hostname;
+                                  return (
+                                    <li
+                                      className="row-span-1"
+                                      key={index}>
+                                      <Link
+                                        href={url}
+                                        target="_blank"
+                                        className="underline">
+                                        <div className="text-sm flex items-center gap-1 hover:bg-MyPurple/50 p-1 rounded">
+                                          <div>{domainName}</div>
+                                          <MdOutlineOpenInNew />
+                                        </div>
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                            </ul>
+                          ) : null}
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                </div>
+                <div>
+                  <NavigationMenu>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-sm transition-all duration-300 bg-MyPurple hover:bg-MyPurple/60 my-2">
+                          Categories
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent className="p-3">
+                          {Array.isArray(data.categories) ? (
+                            <ul className="grid gap-2">
+                              {data.categories.map(
+                                (category: string, index: number) => {
+                                  return (
+                                    <li
+                                      className="row-span-1"
+                                      key={index}>
+                                      <div>
+                                        <div className="bg-MyPurple/50 rounded-md p-1">
+                                          <div>{category}</div>
+                                        </div>
                                       </div>
-                                    </div>
-                                  </li>
-                                );
-                              }
-                            )}
-                          </ul>
-                        ) : null}
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
+                                    </li>
+                                  );
+                                }
+                              )}
+                            </ul>
+                          ) : null}
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                </div>
               </div>
             </div>
           </div>
@@ -606,7 +607,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
             <div className="font-bold text-2xl my-3">{data.name} Markets</div>
             <div className="mb-10">
               <Table>
-                <ScrollArea className="h-[35rem] w-full rounded-md border-2 p-4">
+                <ScrollArea className="h-[35rem] w-full rounded-md border-2">
                   <TableHeader className="z-10 sticky top-0 bg-MyPurple">
                     <TableRow>
                       <TableHead>#</TableHead>
@@ -628,7 +629,10 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                         <TableHead className="font-bold text-lg">
                           {ticker.market.name}
                         </TableHead>
-                        <TableHead>
+                        <TableHead
+                          className={
+                            ticker.base.length >= 15 ? "hidden" : ticker.base
+                          }>
                           {ticker.base}/{ticker.target}
                         </TableHead>
                         <TableHead>${ticker.last.toLocaleString()}</TableHead>

@@ -64,9 +64,7 @@ const NavbarAPI: React.FC = () => {
           });
           setIsLoading(false);
         }, 200);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     };
 
     fetchData();

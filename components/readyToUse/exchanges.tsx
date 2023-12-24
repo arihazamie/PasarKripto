@@ -9,6 +9,16 @@ import { Skeleton } from "../ui/skeleton";
 import { ScrollArea } from "../ui/scroll-area";
 
 import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+import {
   Table,
   TableBody,
   TableCell,
@@ -37,21 +47,7 @@ interface CoinData {
 const ExchangesApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exchangeData, setExchangeData] = useState<Exchange[]>([]);
-  const [coinData, setCoinData] = useState<CoinData>({} as CoinData);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const apiUrl = "https://api.coingecko.com/api/v3/coins/bitcoin";
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setCoinData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   useEffect(() => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/exchanges?per_page=100&page=${currentPage}`;
@@ -63,9 +59,7 @@ const ExchangesApp = () => {
       .then((response) => {
         setExchangeData(response.data);
       })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
+      .catch((error) => {})
       .finally(() => {
         setIsLoading(false);
       });
@@ -79,6 +73,19 @@ const ExchangesApp = () => {
     if (currentPage >= 2) {
       setCurrentPage((currentPage) => currentPage - 1);
     }
+  };
+
+  const setPage1 = () => {
+    setCurrentPage((currentPage) => currentPage - 2);
+  };
+  const setPage2 = () => {
+    setCurrentPage((currentPage) => currentPage - 1);
+  };
+  const setPage3 = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+  const setPage4 = () => {
+    setCurrentPage((currentPage) => currentPage + 2);
   };
 
   useEffect(() => {
@@ -146,20 +153,40 @@ const ExchangesApp = () => {
               </TableBody>
             </ScrollArea>
           </Table>
-          <div className="items-center justify-center text-center mt-5">
-            <div>
-              <Button
-                onClick={handlePrevPage}
-                disabled={currentPage === 1}>
-                Previous
-              </Button>
-              <span>Page {currentPage}</span>
-              <Button
-                onClick={handleNextPage}
-                disabled={currentPage === 7}>
-                Next
-              </Button>
-            </div>
+          <div className="mt-5 cursor-pointer">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={handlePrevPage} />
+                </PaginationItem>
+                <PaginationItem className={currentPage > 2 ? "" : "hidden"}>
+                  <PaginationLink onClick={setPage1}>
+                    {currentPage - 2}
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem className={currentPage > 1 ? "" : "hidden"}>
+                  <PaginationLink onClick={setPage2}>
+                    {currentPage - 1}
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem className="bg-MyPurple/20 rounded-md">
+                  <PaginationLink href="#">{currentPage}</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink onClick={setPage3}>
+                    {currentPage + 1}
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink onClick={setPage4}>
+                    {currentPage + 2}
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext onClick={handleNextPage} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         </div>
       )}

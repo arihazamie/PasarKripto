@@ -39,11 +39,8 @@ const Rates = () => {
         if (response.data.rates) {
           setRateData(response.data);
         } else {
-          console.error("Failed to fetch data");
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     fetchCoinData();

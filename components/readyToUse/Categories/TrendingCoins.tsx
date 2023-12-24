@@ -64,9 +64,7 @@ const TrendingApp: React.FC = () => {
             coin.item.data.price_change_percentage_24h?.usd?.toFixed(2),
         }));
         setData(coinData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     fetchCoinData();

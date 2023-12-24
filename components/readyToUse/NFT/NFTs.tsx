@@ -16,6 +16,15 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 interface data {
   id: string;
   name: string;
@@ -25,31 +34,42 @@ interface data {
 
 const NFTs = () => {
   const [data, setData] = useState<data[]>([]);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const urlApi = `https://api.coingecko.com/api/v3/nfts/list?order=market_cap_usd_desc&per_page=100&page=${page}&sparkline=false`;
+    const urlApi = `${process.env.NEXT_PUBLIC_API_BASE_URL}/nfts/list?order=market_cap_usd_desc&per_page=100&page=${currentPage}&sparkline=false`;
     async function getData() {
       try {
         const response = await axios.get<data[]>(urlApi);
         setData(response.data);
-      } catch (error) {
-        console.log(error + "Error fetching data");
-      }
+      } catch (error) {}
     }
 
     getData();
-  }, [page]);
+  }, [currentPage]);
 
-  const handlePrevious = () => {
-    if (page > 1) {
-      setPage((page) => page - 1);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((currentPage) => currentPage - 1);
     }
   };
 
-  const handleNext = () => {
-    setPage((page) => page + 1);
+  const handleNextPage = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+
+  const setPage1 = () => {
+    setCurrentPage((currentPage) => currentPage - 2);
+  };
+  const setPage2 = () => {
+    setCurrentPage((currentPage) => currentPage - 1);
+  };
+  const setPage3 = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+  const setPage4 = () => {
+    setCurrentPage((currentPage) => currentPage + 2);
   };
 
   useEffect(() => {
@@ -89,7 +109,9 @@ const NFTs = () => {
                     className="bg-MyPurple/5">
                     <TableRow>
                       <TableCell>
-                        {page > 1 ? index + 1 + (page - 1) * 100 : index + 1}
+                        {currentPage > 1
+                          ? index + 1 + (currentPage - 1) * 100
+                          : index + 1}
                       </TableCell>
                       <div className="mt-4">
                         <Link
@@ -109,19 +131,40 @@ const NFTs = () => {
                 ))}
               </ScrollArea>
             </Table>
-            <div className="text-center flex justify-center items-center">
-              <Button
-                variant={"purple"}
-                onClick={handlePrevious}
-                disabled={page === 1}>
-                Previous
-              </Button>
-              <div className="mx-3">{page}</div>
-              <Button
-                variant={"purple"}
-                onClick={handleNext}>
-                Next
-              </Button>
+            <div className="mt-5 cursor-pointer">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious onClick={handlePrevPage} />
+                  </PaginationItem>
+                  <PaginationItem className={currentPage > 2 ? "" : "hidden"}>
+                    <PaginationLink onClick={setPage1}>
+                      {currentPage - 2}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem className={currentPage > 1 ? "" : "hidden"}>
+                    <PaginationLink onClick={setPage2}>
+                      {currentPage - 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem className="bg-MyPurple/20 rounded-md">
+                    <PaginationLink href="#">{currentPage}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink onClick={setPage3}>
+                      {currentPage + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink onClick={setPage4}>
+                      {currentPage + 2}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationNext onClick={handleNextPage} />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
             </div>
           </div>
         </div>

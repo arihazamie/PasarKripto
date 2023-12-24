@@ -1,10 +1,13 @@
-**Tech Stack** : 
+**Tech Stack** :
+
 - NextJS
 - TypeScript
+- Axios
 - TailwindCSS
-- Shadcn
+- ShadcnUI
 
 **API** :
-- coingecko.com
-- etherscan.io
-- blockchair.com
+
+- CoinGecko
+- Etherscan
+- Blockchair

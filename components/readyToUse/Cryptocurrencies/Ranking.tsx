@@ -9,6 +9,16 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+import {
   Table,
   TableBody,
   TableCell,
@@ -45,11 +55,9 @@ const YourComponent: React.FC = () => {
         const response = await axios.get(url);
         setData(response.data);
       } catch (error) {
-        console.error(error);
         setError("Error fetching coin data");
       }
     }
-
     fetchCoinData();
   }, [currentPage]);
 
@@ -60,6 +68,19 @@ const YourComponent: React.FC = () => {
     if (currentPage > 1) {
       setCurrentPage((currentPage) => currentPage - 1);
     }
+  };
+
+  const setPage1 = () => {
+    setCurrentPage((currentPage) => currentPage - 2);
+  };
+  const setPage2 = () => {
+    setCurrentPage((currentPage) => currentPage - 1);
+  };
+  const setPage3 = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+  const setPage4 = () => {
+    setCurrentPage((currentPage) => currentPage + 2);
   };
 
   useEffect(() => {
@@ -222,16 +243,41 @@ const YourComponent: React.FC = () => {
                 </TableBody>
               </ScrollArea>
             </Table>
-            <div className="mt-5 items-center justify-center text-center">
-              <div className="flex gap-5 justify-center items-center">
-                <Button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}>
-                  Previous
-                </Button>
-                <span>Page {currentPage}</span>
-                <Button onClick={handleNextPage}>Next</Button>
-              </div>
+            <div className="mt-5 cursor-pointer">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious onClick={handlePrevPage} />
+                  </PaginationItem>
+                  <PaginationItem className={currentPage > 2 ? "" : "hidden"}>
+                    <PaginationLink onClick={setPage1}>
+                      {currentPage - 2}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem className={currentPage > 1 ? "" : "hidden"}>
+                    <PaginationLink onClick={setPage2}>
+                      {currentPage - 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem className="bg-MyPurple/20 rounded-md">
+                    <PaginationLink href="#">{currentPage}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink onClick={setPage3}>
+                      {currentPage + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink onClick={setPage4}>
+                      {currentPage + 2}
+                    </PaginationLink>
+                  </PaginationItem>
+
+                  <PaginationItem>
+                    <PaginationNext onClick={handleNextPage} />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
             </div>
           </div>
         </div>

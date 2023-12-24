@@ -1,7 +1,7 @@
-"use client"
-import "@/app/globals.css"
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+"use client";
+import "@/app/globals.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import {
   Table,
@@ -11,7 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 // Define an interface for the data
 interface CoinData {
@@ -32,10 +32,7 @@ const TrendingApp: React.FC = () => {
         const response = await axios.get<{ categories: CoinData[] }>(url);
 
         setData(response.data.categories);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+      } catch (error) {}
     }
 
     fetchCoinData();
@@ -43,7 +40,7 @@ const TrendingApp: React.FC = () => {
 
   return (
     <>
-    <div className="text-center text-lg mt-2">Trending Categories</div>
+      <div className="text-center text-lg mt-2">Trending Categories</div>
       <Table>
         <TableHeader className="text-left">
           <TableRow>
@@ -55,13 +52,20 @@ const TrendingApp: React.FC = () => {
           {data.map((coin: CoinData) => (
             <TableRow key={coin.id}>
               <TableCell className="font-bold text-base">{coin.name}</TableCell>
-              <TableCell className={coin.market_cap_1h_change < 0 ? 'text-red-500' : 'text-green-500'}>{coin.market_cap_1h_change.toFixed(2)} %</TableCell>
+              <TableCell
+                className={
+                  coin.market_cap_1h_change < 0
+                    ? "text-red-500"
+                    : "text-green-500"
+                }>
+                {coin.market_cap_1h_change.toFixed(2)} %
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </>
-  )
-}
+  );
+};
 
-export default TrendingApp
+export default TrendingApp;

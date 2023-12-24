@@ -66,9 +66,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
         const url = `${process.env.NEXT_PUBLIC_API_BLOCK}/bitcoin/stats`;
         const response = await axios.get<Blocks>(url);
         setData(response.data);
-      } catch (error) {
-        console.error("Error fetching coin data:", error);
-      }
+      } catch (error) {}
     }
 
     fetchCoinData();

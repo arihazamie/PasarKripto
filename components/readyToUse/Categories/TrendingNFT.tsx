@@ -56,9 +56,7 @@ const NFTApp: React.FC = () => {
         }));
 
         setData(nftData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     }
 
     fetchNFTData();

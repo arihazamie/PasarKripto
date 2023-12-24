@@ -7,15 +7,14 @@ import { DarkMode } from "@/components/ui/darkmode";
 import NavigationBar from "@/components/readyToUse/Navbar/navbar";
 const gabarito = Gabarito({ subsets: ["latin"] });
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Bitcoin, Ethereum } from "./Images/Images";
 import Image from "next/image";
 
 import React from "react";
 import NavbarAPI from "@/components/readyToUse/Navbar/navbarAPI";
-import { Input } from "@/components/ui/input";
 import MobileNav from "@/components/readyToUse/Navbar/MobileNavbar";
 import Logo from "./icon.png";
 import Separator from "@/components/readyToUse/Navbar/Separator";
+import SearchInput from "@/components/readyToUse/input";
 
 //Logos
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -37,35 +36,38 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body className={gabarito.className}>
         <div
-          className="z-50 py-5"
+          className="py-5"
           id="Navbar">
           <SpeedInsights />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark">
-            <div className="flex justify-center items-center md:gap-12 gap-28 py-4">
+            <div className="flex justify-center items-center md:gap-12 gap-5 py-4">
               <Link
-                href={"/"}
+                href={{ pathname: "/" }}
                 className="flex items-center gap-2">
                 <Image
                   src={Logo}
-                  width={50}
-                  height={50}
+                  width={64}
+                  height={64}
                   alt="PasarKripto Image"
-                  className="hover:animate-spin"
+                  className="hover:animate-spin w-8 h-8 md:w-14 md:h-14"
                 />
-                <div className="md:text-3xl text-2xl font-bold transition-all duration-300 hover:text-MyPurple">
+                <div className="md:text-3xl text-xl font-bold transition-all duration-300 hover:text-MyPurple">
                   PasarKripto
                 </div>
               </Link>
               <div className="hidden md:block">
                 <NavigationBar />
               </div>
-              <div className="md:hidden">
-                <MobileNav />
-              </div>
               <div className="hidden md:block">
                 <DarkMode />
+              </div>
+              <div>
+                <SearchInput />
+              </div>
+              <div className="md:hidden">
+                <MobileNav />
               </div>
             </div>
             <div>

@@ -36,9 +36,7 @@ const Categories = () => {
       try {
         const response = await axios.get<data[]>(urlApi);
         setData(response.data);
-      } catch (error) {
-        console.log(error + "Error fetching data");
-      }
+      } catch (error) {}
     }
 
     getData();

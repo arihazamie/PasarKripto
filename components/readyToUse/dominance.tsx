@@ -30,9 +30,7 @@ const DominanceApp = () => {
       try {
         const response = await axios.get<GlobalData>(urlApi);
         setData([response.data]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     };
 
     fetchData();
