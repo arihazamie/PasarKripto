@@ -28,18 +28,26 @@ const SearchInput = () => {
   useEffect(() => {
     if (search) {
       axios
-        .get<Data>(
-          `https://api.coingecko.com/api/v3/search?query=${search}&per_page=10`
-        )
+        .get<Data>(`https://api.coingecko.com/api/v3/search?query=${search}`)
         .then((res) => res.data)
         .then((data) => {
           setData(data);
         });
+    } else {
+      setData(undefined);
     }
   }, [search]);
 
+  const handleClick = () => {
+    if (data) {
+      setData(undefined);
+    }
+  };
+
   return (
-    <div className="grid justify-center items-center">
+    <div
+      className="grid justify-center items-center"
+      onClick={handleClick}>
       <div className="items-center justify-center w-full h-full">
         <Input
           placeholder="Search"
@@ -67,7 +75,7 @@ const SearchInput = () => {
                             width={64}
                             height={64}
                             alt="PasarKripto Image"
-                            className="w-8 h-8 rounded-full"
+                            className="w-8 h-8 rounded-lg"
                           />
                           <div className="flex text-center items-center font-bold">
                             {coin.name}
@@ -76,7 +84,9 @@ const SearchInput = () => {
                             {coin.symbol}
                           </div>
                         </div>
-                        <div className="mr-10">#{coin.market_cap_rank}</div>
+                        <div className="md:mr-10 mr-5">
+                          #{coin.market_cap_rank}
+                        </div>
                       </div>
                     </Link>
                   </div>

@@ -11,7 +11,6 @@ import { ScrollArea } from "../ui/scroll-area";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,

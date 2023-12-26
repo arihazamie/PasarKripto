@@ -19,6 +19,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { BsGlobe2 } from "react-icons/bs";
 import { FaReddit, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import React from "react";
 
 import {
   Table,
@@ -200,6 +201,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
       </>
     );
   }
+
   return (
     <>
       <div className="text-center items-center justify-center flex mt-5 md:mt-10 gap-2">
