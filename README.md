@@ -5,9 +5,3 @@
 - Axios
 - TailwindCSS
 - ShadcnUI
-
-**API** :
-
-- CoinGecko
-- Etherscan
-- Blockchair
