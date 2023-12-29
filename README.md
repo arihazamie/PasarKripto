@@ -1,4 +1,6 @@
-**Tech Stack** :
+Website ini dibuat ketika gabut pulang kuliah saja sekitar 2 bulan lebih dan dibuat dengan :
+
+**Tech Stack**
 
 - NextJS
 - TypeScript
