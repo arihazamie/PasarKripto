@@ -111,7 +111,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           <div className="flex justify-center">
             <Skeleton className="w-40 h-8 my-5" />
           </div>
-          <div className="flex justify-center gap-4">
+          <div className="md:flex grid justify-center gap-4">
             <Skeleton className="w-20 h-20 my-5 rounded-xl" />
             <Skeleton className="w-72 h-20 my-5" />
           </div>
@@ -220,12 +220,18 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                       <div>24H Sales</div>
                     </div>
                     <div className="w-2/4 text-right text-MyPurple">
-                      <div>{data.total_supply.toLocaleString()}</div>
                       <div>
-                        {data.number_of_unique_addresses.toLocaleString()}
+                        {data.total_supply == null
+                          ? "null"
+                          : data.total_supply.toLocaleString()}
                       </div>
                       <div>
-                        {data.one_day_sales}{" "}
+                        {data.number_of_unique_addresses == null
+                          ? "null"
+                          : data.number_of_unique_addresses.toLocaleString()}
+                      </div>
+                      <div>
+                        {data.one_day_sales == null ? 0 : data.one_day_sales}{" "}
                         <span
                           className={
                             data.one_day_sales_24h_percentage_change <= 0
@@ -239,7 +245,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center gap-10 my-5">
+              <div className="flex justify-center gap-10 my-5 mx-5">
                 <Link
                   href={`${data.links.homepage}`}
                   target="_blank"

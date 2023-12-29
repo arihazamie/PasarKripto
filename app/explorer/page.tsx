@@ -180,8 +180,8 @@ const Page = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="mx-56">
-          <div className="mx-64">
+        <div className="md:mx-56 mx-5">
+          <div className="md:mx-64 mx-5">
             <Skeleton className="w-full h-10 my-10" />
           </div>
           <Skeleton className="w-full h-[30rem]" />

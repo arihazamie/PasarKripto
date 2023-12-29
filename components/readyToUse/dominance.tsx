@@ -56,9 +56,9 @@ const DominanceApp = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="mx-60">
+        <div className="md:mx-60 mx-5">
           <Skeleton className="w-full h-10 my-5" />
-          <div className="mx-44">
+          <div className="md:mx-44 mx-5">
             <Skeleton className="w-full h-[40rem]" />
           </div>
         </div>

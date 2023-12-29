@@ -82,7 +82,7 @@ const NFTs = () => {
     <div>
       {isLoading ? (
         <div className="mx-5">
-          <div className="mx-[30rem]">
+          <div className="md:mx-[30rem] mx-5">
             <Skeleton className="w-full h-10 my-5" />
           </div>
           <Skeleton className="w-full h-[40rem]" />
@@ -94,13 +94,13 @@ const NFTs = () => {
           </div>
           <div className="mx-5">
             <Table className="my-5">
-              <ScrollArea className="w-full border-2 shadow rounded-md h-[30rem]">
+              <ScrollArea className="w-full border-2 shadow rounded-md h-[40rem]">
                 <TableHeader className="bg-MyPurple sticky top-0">
                   <TableRow>
                     <TableHead>#</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Symbol</TableHead>
-                    <TableHead>Network</TableHead>
+                    <TableHead className="px-10">Network</TableHead>
                   </TableRow>
                 </TableHeader>
                 {data.map((data: data, index) => (
@@ -124,7 +124,9 @@ const NFTs = () => {
                         <Link href={`/nfts/${data.id}`}>{data.symbol}</Link>
                       </TableCell>
                       <TableCell>
-                        {data.asset_platform_id.toLocaleUpperCase()}
+                        {data.asset_platform_id == "binance-smart-chain"
+                          ? "BSC"
+                          : data.asset_platform_id.toLocaleUpperCase()}
                       </TableCell>
                     </TableRow>
                   </TableBody>

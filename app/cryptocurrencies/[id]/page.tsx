@@ -130,7 +130,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           const response = await axios.get<PageData>(url);
           setData(response.data);
           setIsLoading(false);
-        }, 200);
+        }, 1500);
       } catch (error) {}
     }
 
@@ -181,7 +181,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
           <Skeleton className="w-28 h-10 mt-10" />
           <Skeleton className="w-28 h-10 mt-10" />
         </div>
-        <div className="md:flex block text-left gap-4 mx-52">
+        <div className="flex text-left gap-4 md:mx-52 mx-5">
           <div className="w-1/2">
             <Skeleton className="w-full h-10 mt-3" />
             <Skeleton className="w-full h-10 mt-3" />
@@ -625,7 +625,7 @@ const Page: React.FC<PageProps> = ({ params: { id } }) => {
                   {data.tickers.map((ticker, index) => (
                     <TableBody
                       key={index}
-                      className="-z-10">
+                      className="-z-10 hover:text-MyPurple">
                       <TableRow>
                         <TableHead>{index + 1}</TableHead>
                         <TableHead className="font-bold text-lg">

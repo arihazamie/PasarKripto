@@ -77,7 +77,7 @@ const NFTApp: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="border-2 py-2 px-10 pb-5 rounded-md">
+        <div className="md:border-2 border-none py-2 md:px-10 pb-5 rounded-md">
           <div className="text-lg text-center my-2">
             Top-5 trending NFTs based on the highest Trading Volume in the last
             24 hours
@@ -86,9 +86,10 @@ const NFTApp: React.FC = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Floor</TableHead>
-                  <TableHead>24h%</TableHead>
+                  <TableHead className="px-10">Name</TableHead>
+                  <TableHead className="">Symbol</TableHead>
+                  <TableHead className="px-10">Floor</TableHead>
+                  <TableHead className="px-10">24h%</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="h-auto">
@@ -110,10 +111,10 @@ const NFTApp: React.FC = () => {
                       <TableCell className="font-bold text-base text-left">
                         {nft.name}
                       </TableCell>
-                      <TableCell className="text-gray-400">
-                        {nft.symbol}
-                      </TableCell>
                     </Link>
+                    <TableCell className="text-gray-400">
+                      {nft.symbol}
+                    </TableCell>
                     <TableCell className="text-left">
                       {nft.floor_price_in_native_currency.toFixed(3)} ETH
                     </TableCell>

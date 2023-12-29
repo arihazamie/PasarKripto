@@ -101,7 +101,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
             <Skeleton className="w-72 h-7 -ml-3" />
             <Skeleton className="w-64 h-7" />
           </div>
-          <div className="mx-16 flex gap-10">
+          <div className="md:mx-16 mx-0 md:flex grid md:gap-10 gap-5">
             <Skeleton className="w-80 h-72" />
             <Skeleton className="w-80 h-72" />
             <Skeleton className="w-80 h-72" />

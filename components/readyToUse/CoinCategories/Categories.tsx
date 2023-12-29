@@ -51,20 +51,20 @@ const Categories = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="mx-10">
-          <div className="mx-[25rem]">
+        <div className="md:mx-10 mx-5">
+          <div className="md:mx-[25rem] mx-5">
             <Skeleton className="w-full h-10 my-10" />
           </div>
           <Skeleton className="w-full h-[40rem]" />
         </div>
       ) : (
-        <div className="mx-10">
+        <div className="mx-5">
           <div className="my-10 text-center font-bold text-2xl">
             List all categories with market data
           </div>
           <Table>
-            <ScrollArea className="w-full h-[30rem] rounded-md border-2 shadow">
-              <TableHeader className="bg-MyPurple sticky top-0">
+            <ScrollArea className="w-full h-[40rem] rounded-md border-2 shadow">
+              <TableHeader className="bg-MyPurple sticky md:top-0 -top-1">
                 <TableRow>
                   <TableHead>#</TableHead>
                   <TableHead>Name</TableHead>

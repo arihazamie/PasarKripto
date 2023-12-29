@@ -16,11 +16,11 @@ const Page = () => {
     <div>
       {isLoading ? (
         <div className="mx-5">
-          <div className="flex gap-5">
-            <div className="w-1/2">
+          <div className="md:flex grid gap-5">
+            <div className="md:w-1/2 w-full">
               <Skeleton className="w-full h-[30rem]" />
             </div>
-            <div className="w-1/2">
+            <div className="md:w-1/2 w-full">
               <Skeleton className="w-full h-[30rem]" />
             </div>
           </div>

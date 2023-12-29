@@ -77,8 +77,8 @@ const TrendingApp: React.FC = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Rank</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>24H</TableHead>
+            <TableHead className="px-10">Name</TableHead>
+            <TableHead className="px-10">24H</TableHead>
             <TableHead>Price</TableHead>
           </TableRow>
         </TableHeader>
